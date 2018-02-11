@@ -20,7 +20,7 @@
     <div class="mdui-drawer mdui-drawer-close" id="drawer">
       <div id="drawer-top">
         <div>
-            <img src="https://avatars2.githubusercontent.com/u/31270926?s=400&u=36dcb7f1bc7d5abc7e02cabaf7c5be68f32e998e&v=4" class="mdui-img-fluid mdui-img-circle" style="width:60px">
+            <img src="http://120.78.165.238:4311/cover-1517724201.png" class="mdui-img-fluid mdui-img-circle" style="width:60px">
         </div>
       </div>
       <div>
@@ -32,9 +32,13 @@
             <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
           </div>
           <ul class="mdui-collapse-item-body mdui-list">
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">Overview</li>
-            <li class="mdui-list-item mdui-ripple " style="background-color:#EBEBEB">All Pages</li>
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">Landing Pages</li>
+            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB"
+                @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
+                <span class="mdui-color-indigo mdui-list-item-avatar mdui-icon catagory-item-count">
+									{{item.count}}
+								</span>
+              <div style="margin-left:32px;">{{item.item | capitalize}}</div>
+            </li>
           </ul>
         </li>
       </ul>
@@ -92,6 +96,59 @@
           <p class="jumbotron-text">你还见过多少人</p>
         </div>
       </div>
+
+				<!-- <div class="mdui-col-md-3 mdui-hidden-sm-down">
+					<div class="mdui-card mdui-shadow-8" id="right-catagory-div">
+						<div class="mdui-center" style="text-align:center;margin: 20px 0;">
+							<h2><i class="mdui-icon material-icons">&#xe06d;</i>&nbsp;Catagory</h2>
+						</div>
+						<div class="mdui-divider"></div>
+						<ul class="mdui-list mdui-list-dense">
+							<li class="mdui-list-item mdui-ripple" @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
+								<div class="mdui-list-item-content">
+									<div class="mdui-list-item-title">{{item.item | capitalize}}</div>
+								</div>
+								<span class="mdui-color-indigo mdui-list-item-avatar mdui-icon catagory-item-count">
+									{{item.count}}
+								</span>
+							</li>
+						</ul>
+					</div>
+					<div class="mdui-card mdui-shadow-8" style="margin-top:20px;">
+						<div class="mdui-center" style="text-align:center;margin: 20px 0;">
+							<h2><i class="mdui-icon material-icons">code</i>&nbsp;Code</h2>
+						</div>
+						<div class="mdui-divider"></div>
+						<div id="code-item-list">
+							<ul class="mdui-list mdui-list-dense">
+								<li class="mdui-list-item mdui-ripple" :mdui-dialog="BindMduiDialog(code.id)"
+									v-for="code in codeDataArray">
+									<div class="mdui-list-item-content" style="color:#616161">{{code.title}}</div>
+									<div class="mdui-dialog" :id="BindCodeDialogId(code.id)">
+										<div class="code-dialog-body" style="margin:20px;">
+											<h2 class="code-title" style="text-align:center;margin-bottom:10px;">{{code.title}}</h2>
+											<div class="code-content" v-html="code.content"></div>
+										</div>
+										<div>
+											<button class="mdui-fab mdui-ripple mdui-center mdui-color-blue-700"
+															@click="copyCode(code.id,code.body)">
+												<i class="mdui-icon material-icons">content_copy</i>
+											</button>
+										</div>
+										<br>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<button class="mdui-btn mdui-btn-block mdui-ripple mdui-color-blue-700 mdui-btn-raised"
+											@click="MoreCodeData" :disabled="showNoCodeData">
+								更多代码片段
+							</button>
+						</div>
+					</div>
+				</div> -->
+
   </div>
 </template>
 
@@ -106,6 +163,11 @@
         navBgColor:false,
       }
     },
+    computed:{
+			cgItemArray:function() {
+				return this.$store.state.cgItemArray
+			}
+    },
     methods:{
       menu:function(){
         this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -119,12 +181,23 @@
       openDrawer:function() {
         var inst = new mdui.Drawer('#drawer',{overlay:true});
         inst.open();
-      }
-
+      },
+      toCatagoryPost:function(item){
+        var inst = new mdui.Drawer('#drawer');
+        var $$ = mdui.JQ;
+        inst.close(); // 关闭抽屉导航栏
+        $$.hideOverlay();  // 隐藏遮罩
+        $$.unlockScreen();  // 解锁屏幕
+				this.$router.push({ name: 'Catagory', params: { item: item }})
+			},
     },
     created:function(){
       this.scroll = 0
-    }
+      this.$store.dispatch('fetchCgItemAn')
+    },
+    mounted:function(){
+			mdui.mutation();
+		},
   }
 </script>
 

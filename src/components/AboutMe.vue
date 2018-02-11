@@ -7,7 +7,7 @@
               <div class="mdui-col-md-3">
                 <div class="mdui-card-media" id="aboutme-left-div">
                   <div id="my_gravatar" class="mdui-center">
-                    <img src="../assets/my_gravatar.jpg" class="mdui-img-fluid mdui-img-circle">
+                    <img src="http://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle">
                   </div>
                   <div>
                     <div style="text-align:center">
@@ -31,17 +31,17 @@
                       <p style="margin-bottom:20px">截止建站到目前为止</p>
                       <p>已经收获了&nbsp;<span style="color:#F44336;font-weight:bolder">{{likeCount}}</span>&nbsp;个LIKE了</p>
                     </div>
-                    <div class="mdui-divider"></div>
-                    <div style="text-align:center;margin-bottom:20px;margin-top:30px;color:#ABAAAA;">
+                    <div class="mdui-divider mdui-hidden-sm-down"></div>
+                    <div style="text-align:center;margin-bottom:20px;margin-top:30px;color:#ABAAAA;" class="mdui-hidden-sm-down">
                       个人项目和代码库
                     </div>
                     <div class="mdui-center">
-                      <div class="mdui-chip mdui-center" style="margin-bottom:20px;"
+                      <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
                             onclick="window.open('https://github.com/PushyZqin')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
                         <span class="mdui-chip-title">GitHub</span>
                       </div>
-                      <div class="mdui-chip mdui-center" style="margin-bottom:20px;"
+                      <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
                             onclick="window.open('#')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
                         <span class="mdui-chip-title" style="text-align:center">博客</span>
@@ -52,7 +52,7 @@
               </div>
               <div class="mdui-col-md-9">
                 <div class="mdui-card-media" id="aboutme-right-div">
-                  <div class="mdui-card" style="margin:10px;">
+                  <!-- <div class="mdui-card" style="margin:10px;">
                     <div class="mdui-card-media">
                       <img src="https://llp0574.github.io//img/js.png"/>
                       <div class="mdui-card-media-covered">
@@ -62,41 +62,44 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- <transition-group name="list" tag="p"> -->
-                    <!-- <div v-if="showMsg" key="item"> -->
+                  </div> -->
                     <div key="item">
-                      <div class="aboutme-title"><h2>个人介绍</h2></div>
-                      <div style="margin:0 30px;padding:10px;">
-                        <ul class="mdui-list mdui-list-dense">
-                          <li class="mdui-list-item mdui-ripple item-list">网名：Pushy、PushyZqin &nbsp;来自英文一词Pushy，译为有进取心的（诚然有固执己见、一意孤行之意...）</li>
-                          <li class="mdui-list-item mdui-ripple item-list">年龄：98年生，今19</li>
-                          <li class="mdui-list-item mdui-ripple item-list">学历：本科大二在读，坐标河北某高校</li>
-                          <li class="mdui-list-item mdui-ripple item-list">专业：非科班，但热爱编程</li>
-                        </ul>
-                      </div>
-                      <div class="aboutme-title"><h2>我的技能</h2></div>
-                      <div style="margin:0 30px;padding:10px;">
-                        <ul class="mdui-list mdui-list-dense">
-                          <li class="mdui-list-item mdui-ripple item-list">Python，及基于Python编写的Web应用框架诸如Flask、Django等</li>
-                          <li class="mdui-list-item mdui-ripple item-list">了解基本的SQL知识，及ORM框架</li>
-                          <li class="mdui-list-item mdui-ripple item-list">渐进式的JavaScript框架Vue，Bootstrap、MDUI、Elements等UI框架</li>
-                        </ul>
+                      <div id="item-div-first">
+                        <div class="aboutme-title"><h2 style="margin:0">个人介绍</h2></div>
+                        <div class="mdui-divider" style="margin-bottom:20px;"></div>
+                        <div id="introduction-div">
+                          <blockquote>&nbsp;&nbsp;首先很荣幸你能浏览到我的博客，不论是我在平台宣传还是机缘巧合。不过后者的可能性不大，因为这个网站是由Flask提供后端api，Vue做
+                          前端的SPA单页面应用，尽管我预渲染了主要的网页，但是SEO效果注定会不好（虽然Vue也支持SSR服务端渲染，但是基于操作难度大，并且如果不是过多的频繁更新
+                          路由，可能预渲染更适合）。</blockquote>                          
+                          <p>&nbsp;&nbsp;我目前大二本科在读，定位河北某高校，专业非科班，但是从大二上开始热爱编程，从而走上制造bug的道路一去不复回。</p>
+                          <p>&nbsp;&nbsp;所学的知识呢，一丁半点，没有科班的计算机基础教学，都是整天滚爬摸打积累，半天学不懂一个函数。</p>
+                          <p>&nbsp;&nbsp;这个个人博客网站呢，是我花了大概三周多的时间搭建而成的，托管在阿里云。如果你对此感兴趣，可以浏览我的
+                            <a href="https://github.com/PushyZqin" style="color:rgb(26, 188, 156)" target="_blank">GitHub</a>，
+                            或者通过下面的联系方式联系我。
+                          </p>
+                        </div>
                       </div>
                       <div class="aboutme-title"><h2>联系我</h2></div>
-                      <div style="margin:0 30px;padding:10px;">
+                      <div class="mdui-divider"></div>
+                      <div id="contact-me-blockquote">
+                        <blockquote style="color:#616161;line-height:2">
+                          不论是技术上的问答和交流，都可通过邮箱和QQ联系我，欢迎热爱编程的人来找我
+                        </blockquote>
+                      </div>
+                      <div class="personal-list">
                         <ul class="mdui-list mdui-list-dense">
+                          <li class="mdui-list-item mdui-ripple item-list">Email：
+                            1437876073@qq.com
+                          </li>
                           <li class="mdui-list-item mdui-ripple item-list">QQ：
-                            <a href="http://120.78.165.238:4000/static/img/qq_qrcode.3181d65.jpg" style="color:rgb(26, 188, 156)" target="_blank">1437876073</a>
+                            <a href="http://static.pushy.site/personal/qq_qrcode.jpg" style="color:rgb(26, 188, 156)" target="_blank">1437876073</a>
                           </li>
                         </ul>
                       </div>
                     </div>
-                    <!-- <div v-else> -->
                     <div>
-                      <br><br><br><br><br><br><br><br><br>
+                      <br><br>
                     </div>
-                  <!-- </transition-group> -->
                 </div>
               </div>
             </div>
@@ -129,7 +132,7 @@
       getLikeCount:function(){
         var self = this;
         this.likeCount = 'loading'
-        axios.get('http://120.78.165.238:4000/api/blog/like').then(response=>{
+        axios.get('http://api.pushy.site/blog/like').then(response=>{
           self.likeCount = response.data.data.like
         })
       },
@@ -147,12 +150,15 @@
       window.addEventListener('scroll', this.scrollListItem)
     }
   }
-</script>
+</script>=
 
 <style scoped>
 
   li{
     margin-bottom: 10px;
+  }
+  .personal-list{
+    margin:0 30px;padding:10px;
   }
   img:hover{
     cursor: pointer
@@ -166,6 +172,10 @@
   .aboutme-title{
     text-align: center;
     margin-bottom: 20px;
+  }
+  #introduction-div{
+    line-height: 2.0;
+    color:#616161
   }
   #welcome-content p{
     margin-bottom: 12px;
@@ -193,5 +203,28 @@
   opacity: 0;
   transform: translateY(30px);
 }
+
+  @media screen and (max-width:840px){
+    .personal-list{
+      margin:0;
+      padding:0
+    }
+    .mdui-list-item{
+      padding: 0
+    }
+    #aboutme-left-div{
+      margin-bottom: 50px;
+    }
+	}
+  @media screen and (min-width:1024px){
+    #item-div-first{
+      margin: 0px 20px 20px 50px;
+    }
+    #contact-me-blockquote{
+      margin-left: 50px;
+    }
+	}
+
+
 
 </style>

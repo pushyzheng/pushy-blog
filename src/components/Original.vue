@@ -14,25 +14,60 @@
 						</div>
 					</div>
 					<div class="mdui-row" style="margin-top:20px;">
+						<!-- 头像和日期一栏 -->
 						<div class="mdui-col-md-3">
 							<div class="mdui-row">
-								<div class="mdui-col-md-6" style="width:80px;margin-left:20px;">
-									<img src="https://avatars2.githubusercontent.com/u/31270926?s=400&u=20e747be9a91e0b87d6d44d7632e54a55fb9b03f&v=4" class="mdui-img-circle mdui-img-fluid">
+								<div class="mdui-col-md-6 mdui-col-xs-6" style="width:80px;margin-left:20px;">
+									<img src="http://static.pushy.site/personal/gravatar.jpg" class="mdui-img-circle mdui-img-fluid">
 								</div>
-								<div class="mdui-col-md-6">
+								<div class="mdui-col-md-6 mdui-col-xs-6">
 									<div style="margin-top:11px;">
 										<div style="color:#ABAAAA;margin-bottom:5px;">Pushy</div>
-										<!-- <div class="mdui-divider"></div> -->
 										<div style="color:#ABAAAA">2018年2月5日</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="mdui-col-md-5"></div>
-						<div class="mdui-col-md-4 ">
-							<div style="color:#ABAAAA;margin-top:19px;">
+						<div class="mdui-col-md-6"></div>
+						<!-- 分享和文章阅读信息一栏 -->
+						<div class="mdui-col-md-3">
+							<div style="color:#ABAAAA;margin-top:19px;" id="share-div">
+								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '分享该文章'}" mdui-menu="{target: '#share-attr'}">
+									<i class="mdui-icon material-icons">&#xe80d;</i>
+								</a>
+								<ul class="mdui-menu" id="share-attr">
+									<li class="mdui-menu-item">
+										<a href="javascript:;" class="mdui-ripple">
+											<i class="mdui-menu-item-icon mdui-icon material-icons">remove_red_eye</i>分享到QQ
+										</a>
+									</li>
+									<li class="mdui-menu-item">
+										<a href="javascript:;" class="mdui-ripple">
+											<i class="mdui-menu-item-icon mdui-icon material-icons">file_download</i>
+											<span>分享到QQ空间</span>
+										</a>
+									</li>
+									<li class="mdui-divider"></li>
+									<li class="mdui-menu-item">
+										<a href="javascript:;" class="mdui-ripple">
+											<i class="mdui-menu-item-icon mdui-icon material-icons">delete</i>
+											<span>分享到微博</span>
+										</a>
+									</li>
+									<li class="mdui-menu-item">
+										<a href="javascript:;" class="mdui-ripple">
+											<i class="mdui-menu-item-icon"></i>Empty
+										</a>
+									</li>
+								</ul>
+								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}" mdui-menu="{target: '#others-attr',position:'center'}">
+									<i class="mdui-icon material-icons">smartphone</i>
+								</a>
+								<div id="others-attr" class="mdui-menu">
+									<img src="http://static.pushy.site/personal/gravatar.jpg" alt="">
+								</div>
+								&nbsp;
 								共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字 &nbsp;|&nbsp;预计阅读{{originalObj.body | readtime(originalObj.body)}}分钟
-								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '分享该文章'}"><i class="mdui-icon material-icons">&#xe80d;</i></a>
 							</div>
 						</div>
 					</div>
@@ -99,7 +134,7 @@
 				this.showLoading = true
 				var self = this
 				var post_id = this.$route.params.post_id
-				axios.get('http://120.78.165.238:4000/api/posts/' + post_id).then(function(response){
+				axios.get('http://api.pushy.site/posts/' + post_id).then(function(response){
 					console.log(response.data.data)
 					self.showLoading = false
 					self.originalObj = response.data.data
@@ -112,7 +147,7 @@
 				// Prism.highlightAll();
 			},
 			requestGood:function(){
-				axios.post('http://120.78.165.238:4000/api/posts/like',{
+				axios.post('http://api.pushy.site/posts/like',{
 					post_id:this.$route.params.post_id
 				}).then(response=>{
 					mdui.snackbar({
@@ -172,6 +207,10 @@
 
 <style scoped>
 
+	.mdui-menu{
+		width: 200px;
+	}
+
 	#cover-title{
 		background-size:cover;
     background-position: center center;
@@ -226,6 +265,9 @@
 		}
 		#post-container{
 			margin-top: 20px;
+		}
+		#share-div{
+			margin-left: 18px;
 		}
 	}
 

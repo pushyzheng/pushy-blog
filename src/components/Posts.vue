@@ -3,117 +3,55 @@
 		<div v-if="showIndexLoading">
       <loading></loading>
     </div>
-  	<div class="mdui-container" style="margin-bottom:200px;" v-else>
-			<div class="mdui-row">
-				<!-- 左边文章内容主题部分 -->
-				<div class="mdui-col-md-9">
-					<!-- 循环内容文章卡片 -->
-					<transition-group name="list" tag="p">
-						<div class="mdui-shadow-4 post-card" v-for="(post,postIndex) in indexPostsArray" v-bind:key="post.post_id">
-							<!-- 封面和标题部分 -->
-							<div class="cover-title" v-bind:style="backgroundImgStyle(post.cover_url)">
-								<router-link v-bind:to="toOriginalLink(post.post_id)" class="title-link">
-									{{post.title}}
-								</router-link>
-							</div>
-							<!-- 概览部分 -->
-							<div style="color:#777777;line-height:1.8;margin:20px 15px">
-								<span v-html="postContentFilter(post.body,post.post_id)"></span>
-								<router-link v-bind:to="toOriginalLink(post.post_id)" style="color:#1ABC9C">
-									阅读原文
-								</router-link>
-							</div>
+  	<div class="mdui-container-fluid" style="margin-bottom:200px;" v-else>
+			<div id="posts-div">
+			<!-- 循环内容文章卡片 -->
+			<transition-group name="list" tag="p">
+				<div class="mdui-shadow-4 post-card" v-for="(post,postIndex) in indexPostsArray" v-bind:key="post.post_id">
+					<!-- 封面和标题部分 -->
+					<div class="cover-title" v-bind:style="backgroundImgStyle(post.cover_url)">
+						<router-link v-bind:to="toOriginalLink(post.post_id)" class="title-link">
+							{{post.title}}
+						</router-link>
+					</div>
+					<!-- 概览部分 -->
+					<div style="color:#777777;line-height:1.8;margin:20px 15px">
+						<span v-html="postContentFilter(post.body,post.post_id)"></span>
+						<router-link v-bind:to="toOriginalLink(post.post_id)" style="color:#1ABC9C">
+							阅读原文
+						</router-link>
+					</div>
 
-							<div class="mdui-divider"></div>
-							<!-- 文章信息部分 -->
-							<div style="margin-top: 15px;padding-left: 10px;padding-right: 30px;">
-									<!-- 文章 标签 -->
-									<div class="mdui-chip catagory-label"
-											v-bind:class="labelHoverClass(postIndex,CgIndex)"
-											v-for="(item,CgIndex) in post.catagory"
-											@mouseenter="labelMouseEnter(postIndex,CgIndex)"
-											@mouseleave="labelMouseLeave"
-											@click="toCatagoryPost(item)"
-											>
-										<span class="mdui-chip-title">{{item}}</span>
-									</div>
-									<!-- 发布时间 -->
-									<div class="mdui-float-right mdui-valign time-div">
-										<i class="mdui-icon material-icons">access_time</i>&nbsp;
-										<span v-bind:mdui-tooltip="mduiTooltip(post.create_time)">{{post.create_time | timeFilter}}</span>
-									</div>
+					<div class="mdui-divider"></div>
+					<!-- 文章信息部分 -->
+					<div style="margin-top: 15px;padding-left: 10px;padding-right: 30px;">
+							<!-- 文章 标签 -->
+							<div class="mdui-chip catagory-label"
+									v-bind:class="labelHoverClass(postIndex,CgIndex)"
+									v-for="(item,CgIndex) in post.catagory"
+									@mouseenter="labelMouseEnter(postIndex,CgIndex)"
+									@mouseleave="labelMouseLeave"
+									@click="toCatagoryPost(item)"
+									>
+								<span class="mdui-chip-title">{{item}}</span>
 							</div>
-							<br>
-						</div>
-					</transition-group>
-					<div id="readmore-btn-div">
-						<!-- <button class="mdui-btn mdui-ripple mdui-color-pink-a200 mdui-btn-block mdui-btn-raised"
-										@click="readMore" :disabled=showNoAnyPost>
-										{{readMoreBtnValue}}
-						</button> -->
-						<button class="btn btn-primary btn-block">MORE</button>
+							<!-- 发布时间 -->
+							<div class="mdui-float-right mdui-valign time-div">
+								<i class="mdui-icon material-icons">access_time</i>&nbsp;
+								<span v-bind:mdui-tooltip="mduiTooltip(post.create_time)">{{post.create_time | timeFilter}}</span>
+							</div>
 					</div>
+					<br>
 				</div>
-				<!-- 侧边栏，添加mdui-hidden-sm-down类，中等屏幕以下不可见 -->
-				<div class="mdui-col-md-3 mdui-hidden-sm-down">
-					<div class="mdui-card mdui-shadow-8" id="right-catagory-div">
-						<div class="mdui-center" style="text-align:center;margin: 20px 0;">
-							<h2><i class="mdui-icon material-icons">&#xe06d;</i>&nbsp;Catagory</h2>
-						</div>
-						<div class="mdui-divider"></div>
-						<ul class="mdui-list mdui-list-dense">
-							<li class="mdui-list-item mdui-ripple" @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
-								<div class="mdui-list-item-content">
-									<div class="mdui-list-item-title">{{item.item | capitalize}}</div>
-									<!-- <div class="mdui-list-item-text mdui-list-item-one-line">
-										{{item.item | getItemIntroduce(item.item)}}
-									</div> -->
-								</div>
-								<span class="mdui-color-indigo mdui-list-item-avatar mdui-icon catagory-item-count">
-									{{item.count}}
-								</span>
-							</li>
-						</ul>
-					</div>
-						<!-- 代码片段部分： -->
-					<div class="mdui-card mdui-shadow-8" style="margin-top:20px;">
-						<div class="mdui-center" style="text-align:center;margin: 20px 0;">
-							<h2><i class="mdui-icon material-icons">code</i>&nbsp;Code</h2>
-						</div>
-						<div class="mdui-divider"></div>
-						<!-- 列表开始 -->
-						<div id="code-item-list">
-							<ul class="mdui-list mdui-list-dense">
-								<li class="mdui-list-item mdui-ripple" :mdui-dialog="BindMduiDialog(code.id)"
-									v-for="code in codeDataArray">
-									<div class="mdui-list-item-content" style="color:#616161">{{code.title}}</div>
-									<div class="mdui-dialog" :id="BindCodeDialogId(code.id)">
-										<div class="code-dialog-body" style="margin:20px;">
-											<h2 class="code-title" style="text-align:center;margin-bottom:10px;">{{code.title}}</h2>
-											<div class="code-content" v-html="code.content"></div>
-										</div>
-										<div>
-											<button class="mdui-fab mdui-ripple mdui-center mdui-color-blue-700"
-															@click="copyCode(code.id,code.body)">
-												<i class="mdui-icon material-icons">content_copy</i>
-											</button>
-										</div>
-										<br>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<button class="mdui-btn mdui-btn-block mdui-ripple mdui-color-blue-700 mdui-btn-raised"
-											@click="MoreCodeData" :disabled="showNoCodeData">
-								更多代码片段
-							</button>
-						</div>
-					</div>
-				</div>
+			</transition-group>
+			<div id="readmore-btn-div">
+				<button class="mdui-btn mdui-ripple mdui-color-pink-a200 mdui-btn-block mdui-btn-raised"
+								@click="readMore" :disabled=showNoAnyPost>
+								{{readMoreBtnValue}}
+				</button>
+			</div>
 			</div>
 		</div>
-
   </div>
 </template>
 
@@ -176,9 +114,6 @@
 			},
 			toOriginalLink:function(post_id){
 				return '/posts/' + post_id
-			},
-			toCatagoryPost:function(item){
-				this.$router.push({ name: 'Catagory', params: { item: item }})
 			},
 			toTop:function(){
 				// 回顶部方法
@@ -288,21 +223,6 @@
 	}
 
 
-	/* 定义文章卡片的属性： */
-	@media screen and (max-width:840px){
-		.cover-title a{
-			font-size: 22px;
-		}
-	}
-
-	@media screen and (max-width:840px){
-		#right-catagory-div{
-			margin-top: 40px;
-		}
-		#readmore-btn-div{
-		margin: 0 100px;
-		}
-	}
 
 
 	.cover-title{
@@ -336,7 +256,9 @@
 		margin-right: 10px;
 	}
 
-
+	#posts-div{
+		margin: 0 500px;
+	}
 	#loading-text{
 		text-align: center;
 		font-size: 15px;
@@ -373,6 +295,21 @@
 	/* .list-leave-active for below version 2.1.8 */ {
 		opacity: 0;
 		transform: translateY(30px);
+	}
+
+		@media screen and (max-width:840px){
+		.cover-title a{
+			font-size: 22px;
+		}
+		#right-catagory-div{
+			margin-top: 40px;
+		}
+		#readmore-btn-div{
+		margin: 0 100px;
+		}
+		#posts-div{
+			margin: 0
+		}
 	}
 
 </style>

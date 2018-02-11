@@ -92,7 +92,7 @@
         this.showLoading = true
         var self = this
         var item = this.$route.params.item
-        axios.get('http://120.78.165.238:4000/api/catagory/' + item).then(response=>{
+        axios.get('http://api.pushy.site/catagory/' + item).then(response=>{
           if (response.data.data.length == 0) {
             // 返回的数组为零，该目录下没有文章
             console.log('没有文章内容')
