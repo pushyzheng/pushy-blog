@@ -1,5 +1,5 @@
 <template>
-  <div class="posts">
+  <div id="posts">
 		<div v-if="showIndexLoading">
       <loading></loading>
     </div>
@@ -47,10 +47,11 @@
 						</div>
 					</transition-group>
 					<div id="readmore-btn-div">
-						<button class="mdui-btn mdui-ripple mdui-color-pink-a200 mdui-btn-block mdui-btn-raised"
+						<!-- <button class="mdui-btn mdui-ripple mdui-color-pink-a200 mdui-btn-block mdui-btn-raised"
 										@click="readMore" :disabled=showNoAnyPost>
 										{{readMoreBtnValue}}
-						</button>
+						</button> -->
+						<button class="btn btn-primary btn-block">MORE</button>
 					</div>
 				</div>
 				<!-- 侧边栏，添加mdui-hidden-sm-down类，中等屏幕以下不可见 -->

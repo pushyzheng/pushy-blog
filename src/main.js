@@ -72,7 +72,6 @@ Vue.filter('timeFilter',function(value) {
   }else{
     if (back_current_Month == current_Month && current_Day - back_current_Day >0 && current_Day - back_current_Day <10){
       var diff = current_Day - back_current_Day
-      console.log(diff)
       return diff + '天前发布'
     }else{
       return value
