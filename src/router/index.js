@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Posts from '@/components/Posts'
-import Catagory from '@/components/Catagory'
-import Original from '@/components/Original'
-import notfound from '@/components/notfound'
-import AboutMe from '@/components/AboutMe'
+// 修改路由的懒加载：
+const Posts = () => import('@/components/Posts')
+const Catagory = () => import('@/components/Catagory')
+const Original = () => import('@/components/Original')
+const notfound = () => import('@/components/notfound')
+const AboutMe = () => import('@/components/AboutMe')
 
 Vue.use(Router)
 
