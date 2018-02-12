@@ -8,8 +8,11 @@
       <!-- </transition> -->
       </transition-group>
     </div>
-    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink-a200" @click="toTop" 
+    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink-a200 mdui-hidden-sm-down" @click="toTop" 
             mdui-tooltip="{content: '回顶部'}" id="toTop-fib">
+      <i class="mdui-icon material-icons">arrow_upward</i>
+    </button>
+    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink-a200 mdui-fab-mini mdui-hidden-md-up" @click="toTop" id="toTop-fib">
       <i class="mdui-icon material-icons">arrow_upward</i>
     </button>
   </div>

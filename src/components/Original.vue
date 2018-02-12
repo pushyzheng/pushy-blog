@@ -37,20 +37,19 @@
 								</a>
 								<ul class="mdui-menu" id="share-attr">
 									<li class="mdui-menu-item">
-										<a href="javascript:;" class="mdui-ripple">
-											<i class="mdui-menu-item-icon mdui-icon material-icons">remove_red_eye</i>分享到QQ
+										<a href="javascript:;" class="mdui-ripple" @click="shareQQ">
+											<i class="mdui-menu-item-icon mdui-icon material-icons">person</i>分享到QQ
 										</a>
 									</li>
 									<li class="mdui-menu-item">
-										<a href="javascript:;" class="mdui-ripple">
-											<i class="mdui-menu-item-icon mdui-icon material-icons">file_download</i>
+										<a href="javascript:;" class="mdui-ripple" @click="shareQzone">
+											<i class="mdui-menu-item-icon mdui-icon material-icons">share</i>
 											<span>分享到QQ空间</span>
 										</a>
 									</li>
-									<li class="mdui-divider"></li>
 									<li class="mdui-menu-item">
 										<a href="javascript:;" class="mdui-ripple">
-											<i class="mdui-menu-item-icon mdui-icon material-icons">delete</i>
+											<i class="mdui-menu-item-icon mdui-icon material-icons">people</i>
 											<span>分享到微博</span>
 										</a>
 									</li>
@@ -60,11 +59,12 @@
 										</a>
 									</li>
 								</ul>
-								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}" mdui-menu="{target: '#others-attr',position:'center'}">
+								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}" 
+									 mdui-menu="{target: '#others-attr',position:'center'}">
 									<i class="mdui-icon material-icons">smartphone</i>
 								</a>
 								<div id="others-attr" class="mdui-menu">
-									<img src="http://static.pushy.site/personal/gravatar.jpg" alt="">
+									<img src="http://static.pushy.site/pic/15435345434_qrcode.jpg" style="width:250px;">
 								</div>
 								&nbsp;
 								共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字 &nbsp;|&nbsp;预计阅读{{originalObj.body | readtime(originalObj.body)}}分钟
@@ -78,7 +78,7 @@
 					</div>
 					<div style="color:#ABAAAA;float: right;margin-right: 30px;margin-top: 20px;">
 							转载请注明出处:
-							<a href="#" style="color:#1ABC9C" mdui-tooltip="{content: 'http://pushy.site'}">
+							<a style="color:#1ABC9C;cursor:point;" mdui-tooltip="{content: 'http://pushy.site'}">
 								Pushy
 							</a>
 					</div>
@@ -144,7 +144,7 @@
 				return "background-image: url(" + imgUrl + ");"
 			},
 			reRunPrism:function(){
-				// Prism.highlightAll();
+				Prism.highlightAll();
 			},
 			requestGood:function(){
 				axios.post('http://api.pushy.site/posts/like',{
@@ -158,19 +158,34 @@
 					console.log(error)
 				})
 			},
-			havegoodStatus:function(){
+			havegoodStatus:function() {
 				var post_id = this.$route.params.post_id
 				console.log(localStorage[post_id])
 				if (localStorage[post_id]) {
 					this.good = false
 				}
 			},
-			begood:function(){
+			begood:function() {
 				this.good = !this.good
 				this.requestGood()
 				var post_id = this.$route.params.post_id
 				localStorage[post_id] = post_id
-
+			},
+			shareQQ:function() {
+				var url = location.href
+				var title = this.originalObj.title
+				var summay = this.originalObj.body
+				var pics = this.originalObj.cover_url
+				var shareUrl = `http://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
+				window.open(shareUrl)
+			},
+			shareQzone:function() {
+				var url = location.href
+				var title = this.originalObj.title
+				var summay = this.originalObj.body
+				var pics = this.originalObj.cover_url
+				var shareQzoneUrl = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
+				window.open(shareQzoneUrl)
 			}
 		},
 		filters:{
@@ -210,7 +225,9 @@
 	.mdui-menu{
 		width: 200px;
 	}
-
+	.mdui-menu-open {
+		width:250px;height:270px;
+	}
 	#cover-title{
 		background-size:cover;
     background-position: center center;

@@ -72,7 +72,7 @@
                           前端的SPA单页面应用，尽管我预渲染了主要的网页，但是SEO效果注定会不好（虽然Vue也支持SSR服务端渲染，但是基于操作难度大，并且如果不是过多的频繁更新
                           路由，可能预渲染更适合）。</blockquote>                          
                           <p>&nbsp;&nbsp;我目前大二本科在读，定位河北某高校，专业非科班，但是从大二上开始热爱编程，从而走上制造bug的道路一去不复回。</p>
-                          <p>&nbsp;&nbsp;所学的知识呢，一丁半点，没有科班的计算机基础教学，都是整天滚爬摸打积累，半天学不懂一个函数。</p>
+                          <p>&nbsp;&nbsp;所学的知识呢，一丁半点，没有科班的计算机基础教学，都是整天滚爬摸打积累，半天学不懂一个async。</p>
                           <p>&nbsp;&nbsp;这个个人博客网站呢，是我花了大概三周多的时间搭建而成的，托管在阿里云。如果你对此感兴趣，可以浏览我的
                             <a href="https://github.com/PushyZqin" style="color:rgb(26, 188, 156)" target="_blank">GitHub</a>，
                             或者通过下面的联系方式联系我。
@@ -135,19 +135,10 @@
         axios.get('http://api.pushy.site/blog/like').then(response=>{
           self.likeCount = response.data.data.like
         })
-      },
-      scrollListItem:function(){
-        this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
-        if (this.scroll > 250) {
-          this.showMsg = true
-        }
       }
     },
     created:function(){
       this.getLikeCount()
-    },
-    mounted:function(){
-      window.addEventListener('scroll', this.scrollListItem)
     }
   }
 </script>=
