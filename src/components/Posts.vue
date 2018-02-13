@@ -115,6 +115,9 @@
 			toOriginalLink:function(post_id){
 				return '/posts/' + post_id
 			},
+			toCatagoryPost:function(item){
+				this.$router.push({ name: 'Catagory', params: { item: item }})
+			},
 			toTop:function(){
 				// 回顶部方法
 				document.body.scrollTop = 0
@@ -165,7 +168,6 @@
 			}
 		},
 		created:function(){
-			// this.readMore()
 			this.$store.dispatch('fetchIndexPostsAn')
 			this.$store.dispatch('fetchCgItemAn')
 			this.$store.dispatch('fetchCodeDataAn')

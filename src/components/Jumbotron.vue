@@ -20,10 +20,16 @@
     <div class="mdui-drawer mdui-drawer-close" id="drawer">
       <div id="drawer-top">
         <div>
-            <img src="http://120.78.165.238:4311/cover-1517724201.png" class="mdui-img-fluid mdui-img-circle" style="width:60px">
+            <img src="http://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle" style="width:60px">
+        </div>
+        <div style="margin-top:20px;">
+          在这里你能查看到分类和归档信息
+          <br>
+          还有一些代码片段
         </div>
       </div>
       <div>
+      <!-- 分类目录列表 -->
       <ul class="mdui-list" mdui-collapse="{accordion: true}" style="max-width: 360px;">
         <li class="mdui-collapse-item mdui-collapse-item-open">
           <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
@@ -42,6 +48,7 @@
           </ul>
         </li>
       </ul>
+      <!-- 归档列表 -->
       <ul class="mdui-list" mdui-collapse="{accordion: true}" style="max-width: 360px;">
         <li class="mdui-collapse-item">
           <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
@@ -50,12 +57,13 @@
             <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
           </div>
           <ul class="mdui-collapse-item-body mdui-list">
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">Overview</li>
-            <li class="mdui-list-item mdui-ripple " style="background-color:#EBEBEB">All Pages</li>
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">Landing Pages</li>
+            <li class="mdui-list-item mdui-ripple date-list-item" style="background-color:#EBEBEB;">2018年1月</li>
+            <li class="mdui-list-item mdui-ripple date-list-item" style="background-color:#EBEBEB;">2018年2月</li>
+            <li class="mdui-list-item mdui-ripple date-list-item" style="background-color:#EBEBEB;">2018年3月</li>
           </ul>
         </li>
       </ul>
+      <!-- 代码片段列表 -->
       <ul class="mdui-list" mdui-collapse="{accordion: true}" style="max-width: 360px;">
         <li class="mdui-collapse-item">
           <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
@@ -64,26 +72,7 @@
             <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
           </div>
           <ul class="mdui-collapse-item-body mdui-list">
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">Overview</li>
-            <li class="mdui-list-item mdui-ripple " style="background-color:#EBEBEB">All Pages</li>
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">Landing Pages</li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="mdui-list" mdui-collapse="{accordion: true}" style="max-width: 360px;">
-        <li class="mdui-collapse-item">
-          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-            <i class="mdui-list-item-icon mdui-icon material-icons">contacts</i>
-            <div class="mdui-list-item-content" style="font-family:consolas">联系我</div>
-            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-          </div>
-          <ul class="mdui-collapse-item-body mdui-list">
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">
-              <i class="mdui-list-item-icon mdui-icon material-icons">contacts</i>
-              <div style="margin-left:32px;">1437876073@qq.com</div>
-            </li>
-            <li class="mdui-list-item mdui-ripple " style="background-color:#EBEBEB">All Pages</li>
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">Landing Pages</li>
+            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">None</li>
           </ul>
         </li>
       </ul>
@@ -250,7 +239,9 @@
 
   #drawer-top{
     background-image: url('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2905888767,767561608&fm=27&gp=0.jpg');
-    height: 180px;
+    height: 130px;
+    padding-left: 20px;
+    padding-top: 70px;
     background-position: center center;
     background-size: cover;
     color: white

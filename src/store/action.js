@@ -5,20 +5,23 @@ import store from '../store'
 export default {
   // 处理文章内容状态部分：
   fetchIndexPostsAn ({ commit }) {
-    var nextPageNum = store.state.pageNum
-    axios.get('http://api.pushy.site/posts/?page=' + nextPageNum).then(response=>{
+    var pageNum = store.state.pageNum
+    axios.get('http://api.pushy.site/posts/?page=' + pageNum).then(response=>{
       if (response.data.data.length == 0){
         commit(types.NO_ANY_POSTS) // 显示没有任何文章可以加载了
         commit(types.CHANGE_BTN_VALUE)
       }
-      if (nextPageNum == 1){
+      if (pageNum == 1){
+        store.state.requestedPage.push(1)
         // 如果当前页数为第一页，也不去合并数组，直接将第一页的数组赋值
         commit('HIDDEN_INDEX_LOADING')
         store.state.indexPostsArray = response.data.data
       }else{
-        commit(types.FETCH_INDEX_POST,response.data.data)
+        // 判断新加载的对象是否在已经加载的数组当中：
+        if (store.state.requestedPage.indexOf(pageNum) == -1) {
+          commit(types.FETCH_INDEX_POST,response.data.data)
+        }
       }
-      console.log(response.data.data)
     }).catch(error=>{
       commit('HIDDEN_INDEX_LOADING')
     })

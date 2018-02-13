@@ -5,8 +5,6 @@
 		</div> -->
 		<div class="mdui-container-fluid" id="post-container" >
 			<div class="mdui-card post-card">
-		<!-- <transition name="fade"> -->
-				<!-- <div  v-if="originalObj"> -->
 				<div>
 					<div class="mdui-shadow-2">
 						<div id="cover-title" v-bind:style="backgroundImgStyle(originalObj.cover_url)">
@@ -23,14 +21,14 @@
 								<div class="mdui-col-md-6 mdui-col-xs-6">
 									<div style="margin-top:11px;">
 										<div style="color:#ABAAAA;margin-bottom:5px;">Pushy</div>
-										<div style="color:#ABAAAA">2018年2月5日</div>
+										<div style="color:#ABAAAA">{{originalObj.create_time}}</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="mdui-col-md-6"></div>
+						<div class="mdui-col-md-5"></div>
 						<!-- 分享和文章阅读信息一栏 -->
-						<div class="mdui-col-md-3">
+						<div class="mdui-col-md-4">
 							<div style="color:#ABAAAA;margin-top:19px;" id="share-div">
 								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '分享该文章'}" mdui-menu="{target: '#share-attr'}">
 									<i class="mdui-icon material-icons">&#xe80d;</i>
@@ -53,11 +51,6 @@
 											<span>分享到微博</span>
 										</a>
 									</li>
-									<li class="mdui-menu-item">
-										<a href="javascript:;" class="mdui-ripple">
-											<i class="mdui-menu-item-icon"></i>Empty
-										</a>
-									</li>
 								</ul>
 								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}" 
 									 mdui-menu="{target: '#others-attr',position:'center'}">
@@ -66,8 +59,8 @@
 								<div id="others-attr" class="mdui-menu">
 									<img src="http://static.pushy.site/pic/15435345434_qrcode.jpg" style="width:250px;">
 								</div>
-								&nbsp;
-								共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字 &nbsp;|&nbsp;预计阅读{{originalObj.body | readtime(originalObj.body)}}分钟
+								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字 
+								&nbsp;|&nbsp;预计阅读{{originalObj.body | readtime(originalObj.body)}}分钟
 							</div>
 						</div>
 					</div>
@@ -102,8 +95,6 @@
 						</div>
 					</div>
 				</div>
-		<!-- </transition> -->
-
 			</div>
 		</div>
   </div>
@@ -114,13 +105,12 @@
 	import axios from 'axios'
 	import loading from '../components/loading'
 	import mdui from 'mdui'
-  import Prism from 'prismjs'
 
   export default {
 		name: "original",
 		data() {
 			return {
-				originalObj:{cover_url:'http://120.78.165.238:4311/cover-1517724201.png',title:'haha',content:'ahah',body:'body'},
+				originalObj:{cover_url:'http://static.pushy.site/pic/black.png',title:'loading...',content:'loading...',body:'loading...'},
 				showLoading:false,
 				good:true
 			}
@@ -129,22 +119,8 @@
       loading: loading
     },
 		methods:{
-			loadOriginalObj:function(){
-				this.showPost = null
-				this.showLoading = true
-				var self = this
-				var post_id = this.$route.params.post_id
-				axios.get('http://api.pushy.site/posts/' + post_id).then(function(response){
-					console.log(response.data.data)
-					self.showLoading = false
-					self.originalObj = response.data.data
-				})
-			},
 			backgroundImgStyle:function(imgUrl){
 				return "background-image: url(" + imgUrl + ");"
-			},
-			reRunPrism:function(){
-				Prism.highlightAll();
 			},
 			requestGood:function(){
 				axios.post('http://api.pushy.site/posts/like',{
@@ -171,14 +147,16 @@
 				var post_id = this.$route.params.post_id
 				localStorage[post_id] = post_id
 			},
+			// 分享QQ的方法：
 			shareQQ:function() {
-				var url = location.href
-				var title = this.originalObj.title
-				var summay = this.originalObj.body
-				var pics = this.originalObj.cover_url
+				var url = location.href // 分享链接
+				var title = this.originalObj.title // 分享标题
+				var summay = this.originalObj.body // 分享摘要
+				var pics = this.originalObj.cover_url // 分享封面
 				var shareUrl = `http://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
 				window.open(shareUrl)
 			},
+			// 分享QQ空间的方法
 			shareQzone:function() {
 				var url = location.href
 				var title = this.originalObj.title
@@ -201,7 +179,6 @@
 			}
 		},
 		created:function(){
-			this.loadOriginalObj()
 			this.havegoodStatus()
 		},
 		watch:{
@@ -213,8 +190,7 @@
 			mdui.mutation()
 		},
 		updated:function(){
-			this.reRunPrism()
-			console.log('更新了！')
+			Prism.highlightAll();
 		}
   }
 
@@ -250,7 +226,6 @@
 	#card-content{
 		margin: 30px;
 	}
-
 	#post-content{
 		margin-top: 30px;
 		font-size: 16px;
@@ -259,7 +234,7 @@
 	}
 	.post-card{
 		box-shadow:rgb(167, 163, 163) 5px 5px 20px;
-		margin:0 300px;
+		margin:0 400px;
 	}
 	.post-card:hover{
 		box-shadow: rgb(108,105,105) 5px 5px 20px;

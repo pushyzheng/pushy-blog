@@ -8,6 +8,7 @@ export default {
     state.cgItemArray = itemArray
   },
   [types.FETCH_INDEX_POST] (state, newIndexPostArry) {
+    state.requestedPage.push(state.pageNum)
     state.indexPostsArray = state.indexPostsArray.concat(newIndexPostArry)
   },
   [types.NO_ANY_POSTS] (state) {
