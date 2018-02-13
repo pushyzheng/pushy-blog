@@ -11,17 +11,8 @@ export default {
         commit(types.NO_ANY_POSTS) // 显示没有任何文章可以加载了
         commit(types.CHANGE_BTN_VALUE)
       }
-      if (pageNum == 1){
-        store.state.requestedPage.push(1)
-        // 如果当前页数为第一页，也不去合并数组，直接将第一页的数组赋值
         commit('HIDDEN_INDEX_LOADING')
-        store.state.indexPostsArray = response.data.data
-      }else{
-        // 判断新加载的对象是否在已经加载的数组当中：
-        if (store.state.requestedPage.indexOf(pageNum) == -1) {
-          commit(types.FETCH_INDEX_POST,response.data.data)
-        }
-      }
+        commit(types.FETCH_INDEX_POST,response.data.data)
     }).catch(error=>{
       commit('HIDDEN_INDEX_LOADING')
     })

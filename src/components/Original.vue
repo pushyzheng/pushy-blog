@@ -51,13 +51,19 @@
 											<span>分享到微博</span>
 										</a>
 									</li>
+									<li class="mdui-menu-item">
+										<a href="javascript:;" class="mdui-ripple">
+											<i class="mdui-menu-item-icon mdui-icon material-icons">people</i>
+											<span>更多暂未开放</span>
+										</a>
+									</li>
 								</ul>
 								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}" 
 									 mdui-menu="{target: '#others-attr',position:'center'}">
 									<i class="mdui-icon material-icons">smartphone</i>
 								</a>
 								<div id="others-attr" class="mdui-menu">
-									<img src="http://static.pushy.site/pic/15435345434_qrcode.jpg" style="width:250px;">
+									<img style="width:250px;" :src="BindQrcode">
 								</div>
 								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字 
 								&nbsp;|&nbsp;预计阅读{{originalObj.body | readtime(originalObj.body)}}分钟
@@ -136,10 +142,12 @@
 			},
 			havegoodStatus:function() {
 				var post_id = this.$route.params.post_id
-				console.log(localStorage[post_id])
 				if (localStorage[post_id]) {
 					this.good = false
 				}
+			},
+			BindQrcode:function() {
+				return this.post_url
 			},
 			begood:function() {
 				this.good = !this.good

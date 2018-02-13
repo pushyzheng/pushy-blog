@@ -14,7 +14,7 @@
           <div class="mdui-typo-title" style="font-weight:bold;color:white;">关于我</div>
         </router-link>
         <div class="mdui-toolbar-spacer"></div>
-        <a href="javascript:;" class="mdui-btn mdui-btn-icon" style="color: white"><i class="mdui-icon material-icons">search</i></a>
+        <!-- <a href="javascript:;" class="mdui-btn mdui-btn-icon" style="color: white"><i class="mdui-icon material-icons">search</i></a> -->
       </div>
     </div>
     <div class="mdui-drawer mdui-drawer-close" id="drawer">
@@ -202,11 +202,8 @@
 
   /*定义巨幕的样式*/
   #jumbotron{
-    /* background-color: #3F51B5; */
     background-color: black;
-    /* background-image: url("../assets/jumbotron.jpg"); */
     background-image: url("../assets/test/3.jpg");
-    /* background-image: url("https://res.jianhui.org/Bergamo/assets/single-img/bg@2x.jpg?imageMogr2/format/webp/quality/70"); */
     background-size:cover;
     background-position: center center;
     margin-bottom: 25px;
@@ -255,7 +252,6 @@
 
   #drawer{
     background-color: white;
-    /* background-image: url('../assets/jumbotron.jpg') */
   }
   #drawer-top-text{
     padding-top: 123px;

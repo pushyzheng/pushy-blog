@@ -74,6 +74,9 @@
 			}
 		},
 		computed:{
+			pageNum:function() {
+				return this.$store.state.pageNum
+			},
 			indexPostsArray:function() {
 				return this.$store.state.indexPostsArray
 			},
@@ -168,7 +171,9 @@
 			}
 		},
 		created:function(){
-			this.$store.dispatch('fetchIndexPostsAn')
+			if (this.pageNum == 1) {
+				this.$store.dispatch('fetchIndexPostsAn')
+			}
 			this.$store.dispatch('fetchCgItemAn')
 			this.$store.dispatch('fetchCodeDataAn')
 		},

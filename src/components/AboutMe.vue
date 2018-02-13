@@ -42,9 +42,14 @@
                         <span class="mdui-chip-title">GitHub</span>
                       </div>
                       <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
-                            onclick="window.open('#')">
+                            onclick="window.open('https://github.com/PushyZqin/blog-frontend')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
-                        <span class="mdui-chip-title" style="text-align:center">博客</span>
+                        <span class="mdui-chip-title" style="text-align:center">blog-frontend</span>
+                      </div>
+                      <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
+                            onclick="window.open('https://github.com/PushyZqin/blog-backend-api')">
+                        <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
+                        <span class="mdui-chip-title" style="text-align:center">blog-backend-api</span>
                       </div>
                     </div>
                   </div>
@@ -52,17 +57,6 @@
               </div>
               <div class="mdui-col-md-9">
                 <div class="mdui-card-media" id="aboutme-right-div">
-                  <!-- <div class="mdui-card" style="margin:10px;">
-                    <div class="mdui-card-media">
-                      <img src="https://llp0574.github.io//img/js.png"/>
-                      <div class="mdui-card-media-covered">
-                        <div class="mdui-card-primary">
-                          <div class="mdui-card-primary-title">Title</div>
-                          <div class="mdui-card-primary-subtitle">Subtitle</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
                     <div key="item">
                       <div id="item-div-first">
                         <div class="aboutme-title"><h2 style="margin:0">个人介绍</h2></div>

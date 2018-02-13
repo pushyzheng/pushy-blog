@@ -3,9 +3,9 @@
   <div id="loading">
     <div id="loading-div">
       <div class="mdui-spinner mdui-spinner-colorful"></div>
+      <!-- <img src="http://static.pushy.site/pic/loading.gif" alt=""> -->
       <div id="loading-text">
-        加载中,请稍后...
-        <!-- 是我胖虎服务器宕机了 还是小夫你网差了 -->
+        loading...
       </div>
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -30,7 +30,7 @@
     margin-top: 100px;
 	}
 	#loading-text{
-		font-size: 20px;
+		font-size: 16px;
 		color: #616161;
 		font-weight:bolder;
 		margin-top: 10px;
