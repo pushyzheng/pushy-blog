@@ -6,7 +6,7 @@
 		<div class="mdui-container-fluid" id="post-container" >
 			<div class="mdui-card post-card">
 				<div>
-					<div class="mdui-shadow-2">
+					<div class="mdui-shadow-0">
 						<div id="cover-title" v-bind:style="backgroundImgStyle(originalObj.cover_url)">
 								<div id="post-title">{{originalObj.title}}</div>
 						</div>
@@ -16,7 +16,7 @@
 						<div class="mdui-col-md-3">
 							<div class="mdui-row">
 								<div class="mdui-col-md-6 mdui-col-xs-6" style="width:80px;margin-left:20px;">
-									<img src="http://static.pushy.site/personal/gravatar.jpg" class="mdui-img-circle mdui-img-fluid">
+									<img src="https://static.pushy.site/personal/gravatar.jpg" class="mdui-img-circle mdui-img-fluid">
 								</div>
 								<div class="mdui-col-md-6 mdui-col-xs-6">
 									<div style="margin-top:11px;">
@@ -54,18 +54,18 @@
 									<li class="mdui-menu-item">
 										<a href="javascript:;" class="mdui-ripple">
 											<i class="mdui-menu-item-icon mdui-icon material-icons">people</i>
-											<span>更多暂未开放</span>
+											<span>分享到微博</span>
 										</a>
 									</li>
 								</ul>
-								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}" 
+								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}"
 									 mdui-menu="{target: '#others-attr',position:'center'}">
 									<i class="mdui-icon material-icons">smartphone</i>
 								</a>
 								<div id="others-attr" class="mdui-menu">
-									<img style="width:250px;" :src="BindQrcode">
+									<img style="width:250px;" v-bind:src="BindQrcode(originalObj)">
 								</div>
-								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字 
+								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字
 								&nbsp;|&nbsp;预计阅读{{originalObj.body | readtime(originalObj.body)}}分钟
 							</div>
 						</div>
@@ -77,7 +77,7 @@
 					</div>
 					<div style="color:#ABAAAA;float: right;margin-right: 30px;margin-top: 20px;">
 							转载请注明出处:
-							<a style="color:#1ABC9C;cursor:point;" mdui-tooltip="{content: 'http://pushy.site'}">
+							<a style="color:#1ABC9C;cursor:point;" mdui-tooltip="{content: 'https://pushy.site'}">
 								Pushy
 							</a>
 					</div>
@@ -116,7 +116,7 @@
 		name: "original",
 		data() {
 			return {
-				originalObj:{cover_url:'http://static.pushy.site/pic/black.png',title:'loading...',content:'loading...',body:'loading...'},
+				originalObj:{cover_url:'https://static.pushy.site/pic/black.png',title:'loading...',content:'loading...',body:'loading...'},
 				showLoading:false,
 				good:true
 			}
@@ -125,11 +125,22 @@
       loading: loading
     },
 		methods:{
+			loadOriginalObj:function(){
+				this.showPost = null
+				this.showLoading = true
+				var self = this
+				var post_id = this.$route.params.post_id
+				axios.get('https://api.pushy.site/posts/' + post_id).then(function(response){
+					console.log(response.data.data)
+					self.showLoading = false
+					self.originalObj = response.data.data
+				})
+			},
 			backgroundImgStyle:function(imgUrl){
 				return "background-image: url(" + imgUrl + ");"
 			},
 			requestGood:function(){
-				axios.post('http://api.pushy.site/posts/like',{
+				axios.post('https://api.pushy.site/posts/like',{
 					post_id:this.$route.params.post_id
 				}).then(response=>{
 					mdui.snackbar({
@@ -146,8 +157,8 @@
 					this.good = false
 				}
 			},
-			BindQrcode:function() {
-				return this.post_url
+			BindQrcode:function(originalObj) {
+				return originalObj.post_url
 			},
 			begood:function() {
 				this.good = !this.good
@@ -187,6 +198,7 @@
 			}
 		},
 		created:function(){
+			this.loadOriginalObj()
 			this.havegoodStatus()
 		},
 		watch:{
@@ -205,6 +217,8 @@
 </script>
 
 <style scoped>
+
+
 
 	.mdui-menu{
 		width: 200px;

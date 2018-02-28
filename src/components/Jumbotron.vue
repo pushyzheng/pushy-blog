@@ -20,7 +20,7 @@
     <div class="mdui-drawer mdui-drawer-close" id="drawer">
       <div id="drawer-top">
         <div>
-            <img src="http://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle" style="width:60px">
+            <img src="https://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle" style="width:60px">
         </div>
         <div style="margin-top:20px;">
           在这里你能查看到分类和归档信息

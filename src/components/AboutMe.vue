@@ -7,7 +7,7 @@
               <div class="mdui-col-md-3">
                 <div class="mdui-card-media" id="aboutme-left-div">
                   <div id="my_gravatar" class="mdui-center">
-                    <img src="http://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle">
+                    <img src="https://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle">
                   </div>
                   <div>
                     <div style="text-align:center">
@@ -37,17 +37,17 @@
                     </div>
                     <div class="mdui-center">
                       <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
-                            onclick="window.open('https://github.com/PushyZqin')">
+                            onclick="window.open('httpss://github.com/PushyZqin')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
                         <span class="mdui-chip-title">GitHub</span>
                       </div>
                       <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
-                            onclick="window.open('https://github.com/PushyZqin/blog-frontend')">
+                            onclick="window.open('httpss://github.com/PushyZqin/blog-frontend')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
                         <span class="mdui-chip-title" style="text-align:center">blog-frontend</span>
                       </div>
                       <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
-                            onclick="window.open('https://github.com/PushyZqin/blog-backend-api')">
+                            onclick="window.open('httpss://github.com/PushyZqin/blog-backend-api')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
                         <span class="mdui-chip-title" style="text-align:center">blog-backend-api</span>
                       </div>
@@ -64,7 +64,7 @@
                         <div id="introduction-div">
                           <blockquote>&nbsp;&nbsp;首先很荣幸你能浏览到我的博客，不论是我在平台宣传还是机缘巧合。不过后者的可能性不大，因为这个网站是由Flask提供后端api，Vue做
                           前端的SPA单页面应用，尽管我预渲染了主要的网页，但是SEO效果注定会不好（虽然Vue也支持SSR服务端渲染，但是基于操作难度大，并且如果不是过多的频繁更新
-                          路由，可能预渲染更适合）。</blockquote>                          
+                          路由，可能预渲染更适合）。</blockquote>
                           <p>&nbsp;&nbsp;我目前大二本科在读，定位河北某高校，专业非科班，但是从大二上开始热爱编程，从而走上制造bug的道路一去不复回。</p>
                           <p>&nbsp;&nbsp;所学的知识呢，一丁半点，没有科班的计算机基础教学，都是整天滚爬摸打积累，半天学不懂一个async。</p>
                           <p>&nbsp;&nbsp;这个个人博客网站呢，是我花了大概三周多的时间搭建而成的，托管在阿里云。如果你对此感兴趣，可以浏览我的
@@ -86,7 +86,7 @@
                             1437876073@qq.com
                           </li>
                           <li class="mdui-list-item mdui-ripple item-list">QQ：
-                            <a href="http://static.pushy.site/personal/qq_qrcode.jpg" style="color:rgb(26, 188, 156)" target="_blank">1437876073</a>
+                            <a href="https://static.pushy.site/personal/qq_qrcode.jpg" style="color:rgb(26, 188, 156)" target="_blank">1437876073</a>
                           </li>
                         </ul>
                       </div>
@@ -126,7 +126,7 @@
       getLikeCount:function(){
         var self = this;
         this.likeCount = 'loading'
-        axios.get('http://api.pushy.site/blog/like').then(response=>{
+        axios.get('https://api.pushy.site/blog/like').then(response=>{
           self.likeCount = response.data.data.like
         })
       }
