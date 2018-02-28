@@ -33,7 +33,8 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
   	new PrerenderSpaPlugin(
   		path.join(__dirname,'../dist'),
-  		['/','/aboutme','/posts/1517724201','/posts/1517826699'],
+  		['/aboutme','/posts/1519817202','/posts/1519817324','/posts/1519817411','/posts/1519817890',
+      '/posts/1519818136','/posts/1519819757'],
   		{
   			captureAfterTime:5000
   		}
@@ -56,7 +57,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: utils.assetsPath('css/[name].[contenthash].css'),
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
+      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
       // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
       allChunks: true,
     }),
