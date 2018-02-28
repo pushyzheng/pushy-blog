@@ -37,19 +37,24 @@
                     </div>
                     <div class="mdui-center">
                       <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
-                            onclick="window.open('httpss://github.com/PushyZqin')">
+                            onclick="window.open('https://github.com/PushyZqin')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
-                        <span class="mdui-chip-title">GitHub</span>
+                        <span class="mdui-chip-title" style="font-family:consolas">GitHub</span>
                       </div>
                       <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
-                            onclick="window.open('httpss://github.com/PushyZqin/blog-frontend')">
+                            onclick="window.open('https://github.com/PushyZqin/blog-frontend')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
-                        <span class="mdui-chip-title" style="text-align:center">blog-frontend</span>
+                        <span class="mdui-chip-title" style="text-align:center;font-family:consolas">blog-frontend</span>
                       </div>
                       <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
-                            onclick="window.open('httpss://github.com/PushyZqin/blog-backend-api')">
+                            onclick="window.open('https://github.com/PushyZqin/blog-backend-api')">
                         <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
-                        <span class="mdui-chip-title" style="text-align:center">blog-backend-api</span>
+                        <span class="mdui-chip-title" style="text-align:center;font-family:consolas">blog-backend-api</span>
+                      </div>
+                      <div class="mdui-chip mdui-center mdui-hidden-sm-down" style="margin-bottom:20px;"
+                            onclick="window.open('https://github.com/PushyZqin/java-notes')">
+                        <span class="mdui-chip-icon mdui-color-blue"> <i class="mdui-icon material-icons">link</i></span>
+                        <span class="mdui-chip-title" style="text-align:center;font-family:consolas">java-notes</span>
                       </div>
                     </div>
                   </div>
