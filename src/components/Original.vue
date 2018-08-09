@@ -1,16 +1,8 @@
 <template>
   <div class="original">
-		<!-- <div v-if="showLoading">
-			<loading></loading>
-		</div> -->
 		<div class="mdui-container-fluid" id="post-container" >
-			<div class="mdui-card post-card">
+			<div class="post-card">
 				<div>
-					<div class="mdui-shadow-0">
-						<div id="cover-title" v-bind:style="backgroundImgStyle(originalObj.cover_url)">
-								<div id="post-title">{{originalObj.title}}</div>
-						</div>
-					</div>
 					<div class="mdui-row" style="margin-top:20px;">
 						<!-- 头像和日期一栏 -->
 						<div class="mdui-col-md-3">
@@ -21,7 +13,7 @@
 								<div class="mdui-col-md-6 mdui-col-xs-6">
 									<div style="margin-top:11px;">
 										<div style="color:#ABAAAA;margin-bottom:5px;">Pushy</div>
-										<div style="color:#ABAAAA">{{originalObj.create_time}}</div>
+										<div style="color:#ABAAAA">{{post.create_time}}</div>
 									</div>
 								</div>
 							</div>
@@ -63,16 +55,16 @@
 									<i class="mdui-icon material-icons">smartphone</i>
 								</a>
 								<div id="others-attr" class="mdui-menu">
-									<img style="width:250px;" v-bind:src="BindQrcode(originalObj)">
+									<img style="width:250px;" v-bind:src="BindQrcode(post)">
 								</div>
-								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{originalObj.body | wordCount(originalObj.body) }}</span>字
-								&nbsp;|&nbsp;预计阅读{{originalObj.body | readtime(originalObj.body)}}分钟
+								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{post.body | wordCount(post.body) }}</span>字
+								&nbsp;|&nbsp;预计阅读{{post.body | readtime(post.body)}}分钟
 							</div>
 						</div>
 					</div>
 					<div id="card-content">
 						<div class="mdui-card-media">
-								<div id="post-content" v-html="originalObj.content"></div>
+								<div id="post-content" v-html="post.content" class="markdown-body"></div>
 						</div>
 					</div>
 					<div style="color:#ABAAAA;float: right;margin-right: 30px;margin-top: 20px;">
@@ -111,12 +103,13 @@
 	import axios from 'axios'
 	import loading from '../components/loading'
 	import mdui from 'mdui'
+  import urls from '../config/urls'
 
   export default {
 		name: "original",
 		data() {
 			return {
-				originalObj:{cover_url:'https://static.pushy.site/pic/black.png',title:'loading...',content:'loading...',body:'loading...'},
+				post:{cover_url:'https://static.pushy.site/pic/black.png',title:'loading...',content:'loading...',body:'loading...'},
 				showLoading:false,
 				good:true
 			}
@@ -125,15 +118,16 @@
       loading: loading
     },
 		methods:{
-			loadOriginalObj:function(){
-				this.showPost = null
-				this.showLoading = true
-				var self = this
-				var post_id = this.$route.params.post_id
-				axios.get('https://api.pushy.site/posts/' + post_id).then(function(response){
-					console.log(response.data.data)
-					self.showLoading = false
-					self.originalObj = response.data.data
+			loadpost:function(){
+        this.showPost = null;
+        this.showLoading = true;
+        let self = this;
+				axios.get(urls.post.detail(this.$route.params.post_id)).then(function(response){
+          console.log(response.data.data);
+          self.showLoading = false;
+					self.post = response.data.data
+          self.$store.commit('CHANGE_TITLE', self.post.title);
+					self.$store.commit('CHANGE_URL', self.post.cover_url);
 				})
 			},
 			backgroundImgStyle:function(imgUrl){
@@ -152,36 +146,36 @@
 				})
 			},
 			havegoodStatus:function() {
-				var post_id = this.$route.params.post_id
+				let post_id = this.$route.params.post_id
 				if (localStorage[post_id]) {
 					this.good = false
 				}
 			},
-			BindQrcode:function(originalObj) {
-				return originalObj.post_url
+			BindQrcode:function(post) {
+				return post.post_url
 			},
 			begood:function() {
 				this.good = !this.good
 				this.requestGood()
-				var post_id = this.$route.params.post_id
+				let post_id = this.$route.params.post_id
 				localStorage[post_id] = post_id
 			},
 			// 分享QQ的方法：
 			shareQQ:function() {
-				var url = location.href // 分享链接
-				var title = this.originalObj.title // 分享标题
-				var summay = this.originalObj.body // 分享摘要
-				var pics = this.originalObj.cover_url // 分享封面
-				var shareUrl = `http://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
+				let url = location.href // 分享链接
+				let title = this.post.title // 分享标题
+				let summay = this.post.body // 分享摘要
+				let pics = this.post.cover_url // 分享封面
+				let shareUrl = `http://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
 				window.open(shareUrl)
 			},
 			// 分享QQ空间的方法
 			shareQzone:function() {
-				var url = location.href
-				var title = this.originalObj.title
-				var summay = this.originalObj.body
-				var pics = this.originalObj.cover_url
-				var shareQzoneUrl = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
+				let url = location.href
+				let title = this.post.title
+				let summay = this.post.body
+				let pics = this.post.cover_url
+				let shareQzoneUrl = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
 				window.open(shareQzoneUrl)
 			}
 		},
@@ -192,18 +186,18 @@
 			},
 			readtime:function(value){
 				// 计算阅读时间：
-				var length = value.length
-				var time = length / 250
+				let length = value.length
+				let time = length / 250
 				return parseInt(time)
 			}
 		},
 		created:function(){
-			this.loadOriginalObj()
+      this.loadpost();
 			this.havegoodStatus()
 		},
 		watch:{
 			// 如果路由有变化，会再次执行该方法
-			'$route': 'loadOriginalObj'
+			'$route': 'loadpost'
 		},
 		mounted:function(){
 			// 初始化mdui的圆形进度条组件
@@ -218,56 +212,22 @@
 
 <style scoped>
 
-
-
 	.mdui-menu{
 		width: 200px;
-	}
-	.mdui-menu-open {
-		width:250px;height:270px;
-	}
-	#cover-title{
-		background-size:cover;
-    background-position: center center;
-		color:white;
-		padding:20px;
-		font-size:34px;
-		text-shadow:1px 1px 8px #444;
-		font-weight:400;
 	}
 	/* 定义正文中卡片和文字的样式 */
 	#post-container{
 		margin-top: 50px;
 	}
-	#post-title{
-		margin:0px;
-		margin-top:210px;
-		color:white;
-		display:block
-	}
-	#card-content{
-		margin: 30px;
-	}
-	#post-content{
-		margin-top: 30px;
-		font-size: 16px;
-		line-height: 1.8;
-		color:#616161
-	}
 	.post-card{
-		box-shadow:rgb(167, 163, 163) 5px 5px 20px;
 		margin:0 400px;
 	}
-	.post-card:hover{
-		box-shadow: rgb(108,105,105) 5px 5px 20px;
-	}
+  #post-content {
+    /*line-height: 1.6;*/
+  }
 
 	/* 手机端适应样式 */
 	@media screen and (max-width:840px){
-		#post-title {
-			font-size: 22px;
-			margin-top: 150px;
-		}
 		#card-content{
 			margin: 15px;
 		}
@@ -284,14 +244,5 @@
 			margin-left: 18px;
 		}
 	}
-
-	.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-	}
-	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-		opacity: 0;
-	}
-
-
 
 </style>

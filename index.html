@@ -5,90 +5,167 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Pushy</title>
   </head>
+  <link href="https://assets-cdn.github.com/assets/frameworks-01356238c65ce56a395237b592b58668.css" rel="stylesheet">
   <link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.4.0/css/mdui.min.css">
   <link rel="stylesheet" href="https://static.pushy.site/module/prism.css">
   <style>
-  p::selection{color:#fff;background:#B3D4FB;}
-  p::-moz-selection{color:#fff;background:#B3D4FB;}
-  p::-webkit-selection{color:#fff;background:#B3D4FB;}
-  code::selection{color:#fff;background:#B3D4FB;}
-  code::-moz-selection{color:#fff;background:#B3D4FB;}
-  code::-webkit-selection{color:#fff;background:#B3D4FB;}
-  h1::selection{color:#fff;background:#B3D4FB;}
-  h2::selection{color:#fff;background:#B3D4FB;}
-  h3::selection{color:#fff;background:#B3D4FB;}
-  blockquote::selection{color:#fff;background:#B3D4FB;}
-  strong::selection{color:#fff;background:#B3D4FB;}
-  h1::-moz-selection{color:#fff;background:#B3D4FB;}
-  h1::-webkit-selection{color:#fff;background:#B3D4FB;}
-  a::selection{color:#fff;background:#B3D4FB;}
-  a::-moz-selection{color:#fff;background:#B3D4FB;}
-  a::-webkit-selection{color:#fff;background:#B3D4FB;}
 
-body{
-  margin: 0px;
-  background-color: #F7F7F7;
-  overflow-x: hidden;
-}
+    /*github markdown样式*/
+    pre {
+      /*github代码块背景颜色*/
+      background-color: #F6F8FA;
+      /*vue官网代码块背景颜色*/
+      /*background-color: #F8F8F8;*/
+      padding: 14px 14px;
+      margin-top: 5px;
+      font-family: Consolas;
+      overflow-x: auto;
+    }
 
-code{
-  background-color: #F8F8F8;
-  color: #C7254E;
-  padding: 2px 0;
-  font-family: Consolas;
-}
-pre{
-  margin: 30px 0;
-}
-blockquote{
-  background-color: #F7F7F7;
-  border-left: 8px solid #B4B4B4;
-  padding: 15px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  margin-right: 0px;
-  margin-left: 0px;
-}
-blockquote p{
-  margin: 0px;
-}
-a{
-  text-decoration: none;
-}
+    h1 {
+      padding-bottom: 0.3em;
+      font-size: 2em;
+      border-bottom: 1px solid #eaecef;
+    }
 
-p{
-  margin: 0px;
-  margin-bottom: 15px;
-}
+    h2 {
+      padding-bottom: 0.3em;
+      font-size: 1.5em;
+      border-bottom: 1px solid #eaecef;
+    }
 
-h1{
-  color: #616161;
-  font-size: 2.5em;
-  margin: 0px;
-}
+    h3 {
+      font-size: 1.25em;
+    }
 
-h2{
-  color: #616161;
-  font-size: 2em;
-  margin: 0px;
-  margin-top: 1em;
-}
+    h4 {
+      font-size: 1em;
+    }
 
-h3{
-  color: #616161;
-  font-size: 1.6em;
-  margin: 0px;
-  margin-bottom: 10px;
-  margin-top: 30px;
-}
-blockquote{
-  margin: 15px 0;
-}
-/* strong{
-  background-color: #FCF8E3;
-  padding: 5px;
-  font-weight: 500
-} */
+    h5 {
+      font-size: 0.875em;
+    }
+
+    h6 {
+      font-size: 0.85em;
+      color: #6a737d;
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+      margin-top: 24px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    code {
+      padding: 0.2em 0.4em;
+      margin: 0;
+      font-size: 85%;
+      background-color: rgba(27,31,35,0.05);
+      border-radius: 3px;
+      color: #24292e;
+      font-family: Consolas;
+    }
+
+    pre code {
+      background-color: transparent;
+    }
+
+    /*表格样式*/
+
+    table {
+      display: block;
+      width: 100%;
+      overflow: auto;
+    }
+
+    tbody {
+      display: table-row-group;
+      vertical-align: middle;
+      border-color: inherit;
+    }
+
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #c6cbd1
+    }
+
+    th {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+
+    td {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+
+
+/*body{*/
+  /*margin: 0px;*/
+  /*background-color: #F7F7F7;*/
+  /*overflow-x: hidden;*/
+/*}*/
+
+/*code{*/
+  /*background-color: #F8F8F8;*/
+  /*color: #C7254E;*/
+  /*padding: 2px 0;*/
+  /*font-family: Consolas;*/
+/*}*/
+/*pre{*/
+  /*margin: 30px 0;*/
+/*}*/
+/*blockquote{*/
+  /*background-color: #F7F7F7;*/
+  /*border-left: 8px solid #B4B4B4;*/
+  /*padding: 15px;*/
+  /*margin-top: 30px;*/
+  /*margin-bottom: 30px;*/
+  /*margin-right: 0px;*/
+  /*margin-left: 0px;*/
+/*}*/
+/*blockquote p{*/
+  /*margin: 0px;*/
+/*}*/
+/*a{*/
+  /*text-decoration: none;*/
+/*}*/
+
+/*p{*/
+  /*margin: 0px;*/
+  /*margin-bottom: 15px;*/
+/*}*/
+
+/*h1{*/
+  /*color: #616161;*/
+  /*font-size: 2.5em;*/
+  /*margin: 0px;*/
+/*}*/
+
+/*h2{*/
+  /*color: #616161;*/
+  /*font-size: 2em;*/
+  /*margin: 0px;*/
+  /*margin-top: 1em;*/
+/*}*/
+
+/*h3{*/
+  /*color: #616161;*/
+  /*font-size: 1.6em;*/
+  /*margin: 0px;*/
+  /*margin-bottom: 10px;*/
+  /*margin-top: 30px;*/
+/*}*/
+/*blockquote{*/
+  /*margin: 15px 0;*/
+/*}*/
+/*!* strong{*/
+  /*background-color: #FCF8E3;*/
+  /*padding: 5px;*/
+  /*font-weight: 500*/
+/*} *!*/
 #footer{
   background-color: #0E0E0E;
   text-align: center;
@@ -96,45 +173,45 @@ blockquote{
   padding: 30px;
 }
 
-.mdui-divider{
-  margin-bottom: 15px;
-}
-#post-content a {
-  color:#1ABC9C;
-  text-decoration: none;
-}
+/*.mdui-divider{*/
+  /*margin-bottom: 15px;*/
+/*}*/
+/*#post-content a {*/
+  /*color:#1ABC9C;*/
+  /*text-decoration: none;*/
+/*}*/
 
-@media screen and (max-width:840px){
-  h1{
-    color: #616161;
-    font-size: 2em;
-    margin: 0px;
-  }
-  h2{
-    color: #616161;
-    font-size: 1.8em;
-    margin: 0px;
-    margin-top: 0.7em;
-  }
-  h3{
-    color: #616161;
-    font-size: 1.6em;
-    margin: 0px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-  pre{
-    font-size: 10px;
-  }
-  p{
-    margin: 0px;
-    margin-bottom: 10px;
-  }
-  blockquote{
-    padding: 10px;
-    margin: 15px 0;
-  }
-}
+/*@media screen and (max-width:840px){*/
+  /*h1{*/
+    /*color: #616161;*/
+    /*font-size: 2em;*/
+    /*margin: 0px;*/
+  /*}*/
+  /*h2{*/
+    /*color: #616161;*/
+    /*font-size: 1.8em;*/
+    /*margin: 0px;*/
+    /*margin-top: 0.7em;*/
+  /*}*/
+  /*h3{*/
+    /*color: #616161;*/
+    /*font-size: 1.6em;*/
+    /*margin: 0px;*/
+    /*margin-bottom: 10px;*/
+    /*margin-top: 10px;*/
+  /*}*/
+  /*pre{*/
+    /*font-size: 10px;*/
+  /*}*/
+  /*p{*/
+    /*margin: 0px;*/
+    /*margin-bottom: 10px;*/
+  /*}*/
+  /*blockquote{*/
+    /*padding: 10px;*/
+    /*margin: 15px 0;*/
+  /*}*/
+/*}*/
 
   </style>
   <body>

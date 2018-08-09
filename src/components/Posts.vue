@@ -102,7 +102,7 @@
 		methods:{
 			readMore:function(){
 				// 点击“查看更多”触发的事件，1.记录页数状态值+1，2.请求下一页的文章内容
-				this.$store.commit('PAGE_INCREMENT')
+        this.$store.commit('PAGE_INCREMENT');
 				this.$store.dispatch('fetchIndexPostsAn')
 			},
 			postContentFilter:function(content,post_id){
@@ -171,6 +171,7 @@
 			}
 		},
 		created:function(){
+		  this.$store.commit('CHANGE_TITLE', "Hello World");
 			if (this.pageNum == 1) {
 				this.$store.dispatch('fetchIndexPostsAn')
 			}

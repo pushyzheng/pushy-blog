@@ -8,7 +8,7 @@ export default {
     state.cgItemArray = itemArray
   },
   [types.FETCH_INDEX_POST] (state, newIndexPostArry) {
-    state.requestedPage.push(state.pageNum)
+    state.requestedPage.push(state.pageNum);
     state.indexPostsArray = state.indexPostsArray.concat(newIndexPostArry)
   },
   [types.NO_ANY_POSTS] (state) {
@@ -25,6 +25,12 @@ export default {
   },
   [types.NO_MORE_CODE_DATA] (state) {
     state.showNoCodeData = true
+  },
+  [types.CHANGE_TITLE] (state, title) {
+    state.jumbotronTitle = title;
+  },
+  [types.CHANGE_URL] (state, url) {
+    state.jumbotronUrl = url;
   }
 
 }

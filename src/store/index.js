@@ -6,6 +6,8 @@ import actions from './action'
 Vue.use(Vuex)
 
 const state = {
+  jumbotronTitle: null,
+  jumbotronUrl: null,
   pageNum:1, // 记录当前加载的页数值
   requestedPage:[],
   indexPostsArray:[], // 存放首页加载的文章内容数组

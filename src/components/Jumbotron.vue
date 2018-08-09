@@ -1,5 +1,5 @@
 <template>
-  <div id="jumbotron">
+  <div id="jumbotron" :style="styleObject">
     <div class="mdui-appbar mdui-shadow-0">
       <div class="mdui-toolbar" id="jumbotron-nav"
            v-bind:class="{'mdui-color-indigo': navBgColor,'mdui-shadow-2':navBgColor}">
@@ -81,63 +81,10 @@
     <!--顶端巨幕-->
       <div id="jumbotron-pic">
         <div id="jumbotron-text">
-          <p class="jumbotron-text" style="margin-bottom:20px;">像我这样碌碌无为的人</p>
-          <p class="jumbotron-text">你还见过多少人</p>
+          <p class="jumbotron-text" style="margin-bottom:20px;">{{ jumbotronTitle }}</p>
+          <!--<p class="jumbotron-text">你还见过多少人</p>-->
         </div>
       </div>
-
-				<!-- <div class="mdui-col-md-3 mdui-hidden-sm-down">
-					<div class="mdui-card mdui-shadow-8" id="right-catagory-div">
-						<div class="mdui-center" style="text-align:center;margin: 20px 0;">
-							<h2><i class="mdui-icon material-icons">&#xe06d;</i>&nbsp;Catagory</h2>
-						</div>
-						<div class="mdui-divider"></div>
-						<ul class="mdui-list mdui-list-dense">
-							<li class="mdui-list-item mdui-ripple" @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
-								<div class="mdui-list-item-content">
-									<div class="mdui-list-item-title">{{item.item | capitalize}}</div>
-								</div>
-								<span class="mdui-color-indigo mdui-list-item-avatar mdui-icon catagory-item-count">
-									{{item.count}}
-								</span>
-							</li>
-						</ul>
-					</div>
-					<div class="mdui-card mdui-shadow-8" style="margin-top:20px;">
-						<div class="mdui-center" style="text-align:center;margin: 20px 0;">
-							<h2><i class="mdui-icon material-icons">code</i>&nbsp;Code</h2>
-						</div>
-						<div class="mdui-divider"></div>
-						<div id="code-item-list">
-							<ul class="mdui-list mdui-list-dense">
-								<li class="mdui-list-item mdui-ripple" :mdui-dialog="BindMduiDialog(code.id)"
-									v-for="code in codeDataArray">
-									<div class="mdui-list-item-content" style="color:#616161">{{code.title}}</div>
-									<div class="mdui-dialog" :id="BindCodeDialogId(code.id)">
-										<div class="code-dialog-body" style="margin:20px;">
-											<h2 class="code-title" style="text-align:center;margin-bottom:10px;">{{code.title}}</h2>
-											<div class="code-content" v-html="code.content"></div>
-										</div>
-										<div>
-											<button class="mdui-fab mdui-ripple mdui-center mdui-color-blue-700"
-															@click="copyCode(code.id,code.body)">
-												<i class="mdui-icon material-icons">content_copy</i>
-											</button>
-										</div>
-										<br>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<button class="mdui-btn mdui-btn-block mdui-ripple mdui-color-blue-700 mdui-btn-raised"
-											@click="MoreCodeData" :disabled="showNoCodeData">
-								更多代码片段
-							</button>
-						</div>
-					</div>
-				</div> -->
-
   </div>
 </template>
 
@@ -149,13 +96,25 @@
     data(){
       return {
         scroll:'',
-        navBgColor:false,
+        navBgColor:false
       }
     },
     computed:{
 			cgItemArray:function() {
 				return this.$store.state.cgItemArray
-			}
+			},
+      jumbotronTitle () {
+			  return this.$store.state.jumbotronTitle
+      },
+      jumbotronUrl () {
+			  return this.$store.state.jumbotronUrl
+      },
+      styleObject() {
+			  return {
+			    backgroundImg: `url(${this.$store.state.jumbotronUrl})`
+			    // backgroundImg: this.$store.state.jumbotronUrl
+        }
+      }
     },
     methods:{
       menu:function(){
@@ -196,14 +155,10 @@
     color: white;
   }
 
-  .jumbotron-text::selection{color:#fff;background:#B3D4FB;}
-  .jumbotron-text::-moz-selection{color:#fff;background:#B3D4FB;}
-  .jumbotron-text::-webkit-selection{color:#fff;background:#B3D4FB;}
-
   /*定义巨幕的样式*/
   #jumbotron{
     background-color: black;
-    background-image: url("../assets/test/3.jpg");
+    /*background-image: url("../assets/test/3.jpg");*/
     background-size:cover;
     background-position: center center;
     margin-bottom: 25px;
@@ -221,18 +176,6 @@
     color:white;
     font-weight: bold;
   }
-
-  @media screen and (max-width:840px){
-    #jumbotron-pic{
-      padding: 80px;
-      text-align: center;
-    }
-    .jumbotron-text{
-      font-size: 18px;
-      color:white;
-      font-weight: bold;
-    }
-	}
 
   #drawer-top{
     background-image: url('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2905888767,767561608&fm=27&gp=0.jpg');
@@ -270,6 +213,18 @@
       transform: translateX(-290px);
     }
   }
+
+  @media screen and (max-width:840px){
+    #jumbotron-pic{
+      padding: 80px;
+      text-align: center;
+    }
+    .jumbotron-text{
+      font-size: 18px;
+      color:white;
+      font-weight: bold;
+    }
+	}
 
   .mdui-collapse-item-body .mdui-list-item{
     padding-left: 16px;
