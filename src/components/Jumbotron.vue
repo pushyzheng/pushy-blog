@@ -14,7 +14,6 @@
           <div class="mdui-typo-title" style="font-weight:bold;color:white;">关于我</div>
         </router-link>
         <div class="mdui-toolbar-spacer"></div>
-        <!-- <a href="javascript:;" class="mdui-btn mdui-btn-icon" style="color: white"><i class="mdui-icon material-icons">search</i></a> -->
       </div>
     </div>
     <div class="mdui-drawer mdui-drawer-close" id="drawer">
@@ -22,60 +21,15 @@
         <div>
             <img src="https://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle" style="width:60px">
         </div>
-        <div style="margin-top:20px;">
-          在这里你能查看到分类和归档信息
-          <br>
-          还有一些代码片段
-        </div>
       </div>
       <div>
       <!-- 分类目录列表 -->
-      <ul class="mdui-list" mdui-collapse="{accordion: true}" style="max-width: 360px;">
-        <li class="mdui-collapse-item mdui-collapse-item-open">
-          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-            <i class="mdui-list-item-icon mdui-icon material-icons">label</i>
-            <div class="mdui-list-item-content" style="font-family:consolas">分类</div>
-            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-          </div>
-          <ul class="mdui-collapse-item-body mdui-list">
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB"
-                @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
-                <span class="mdui-color-indigo mdui-list-item-avatar mdui-icon catagory-item-count">
-									{{item.count}}
-								</span>
-              <div style="margin-left:32px;">{{item.item | capitalize}}</div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <!-- 归档列表 -->
-      <ul class="mdui-list" mdui-collapse="{accordion: true}" style="max-width: 360px;">
-        <li class="mdui-collapse-item">
-          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-            <i class="mdui-list-item-icon mdui-icon material-icons">date_range</i>
-            <div class="mdui-list-item-content" style="font-family:consolas">归档</div>
-            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-          </div>
-          <ul class="mdui-collapse-item-body mdui-list">
-            <li class="mdui-list-item mdui-ripple date-list-item" style="background-color:#EBEBEB;">2018年1月</li>
-            <li class="mdui-list-item mdui-ripple date-list-item" style="background-color:#EBEBEB;">2018年2月</li>
-            <li class="mdui-list-item mdui-ripple date-list-item" style="background-color:#EBEBEB;">2018年3月</li>
-          </ul>
-        </li>
-      </ul>
-      <!-- 代码片段列表 -->
-      <ul class="mdui-list" mdui-collapse="{accordion: true}" style="max-width: 360px;">
-        <li class="mdui-collapse-item">
-          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-            <i class="mdui-list-item-icon mdui-icon material-icons">code</i>
-            <div class="mdui-list-item-content" style="font-family:consolas">代码片段</div>
-            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-          </div>
-          <ul class="mdui-collapse-item-body mdui-list">
-            <li class="mdui-list-item mdui-ripple" style="background-color:#EBEBEB">None</li>
-          </ul>
-        </li>
-      </ul>
+      <div @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
+        <div class="mdui-chip" style="float: left;margin: 5px;">
+          <span class="mdui-chip-icon">{{item.count}}</span>
+          <span class="mdui-chip-title">{{item.item | capitalize}}</span>
+        </div>
+      </div>
       </div>
     </div>
     <!--顶端巨幕-->
@@ -109,10 +63,9 @@
       jumbotronUrl () {
 			  return this.$store.state.jumbotronUrl
       },
-      styleObject() {
+      styleObject () {
 			  return {
-			    backgroundImg: `url(${this.$store.state.jumbotronUrl})`
-			    // backgroundImg: this.$store.state.jumbotronUrl
+			    backgroundImage: 'url(' + this.$store.state.jumbotronUrl + ')'
         }
       }
     },
@@ -127,12 +80,12 @@
          }
       },
       openDrawer:function() {
-        var inst = new mdui.Drawer('#drawer',{overlay:true});
+        let inst = new mdui.Drawer('#drawer',{overlay:true});
         inst.open();
       },
       toCatagoryPost:function(item){
-        var inst = new mdui.Drawer('#drawer');
-        var $$ = mdui.JQ;
+        let inst = new mdui.Drawer('#drawer');
+        let $$ = mdui.JQ;
         inst.close(); // 关闭抽屉导航栏
         $$.hideOverlay();  // 隐藏遮罩
         $$.unlockScreen();  // 解锁屏幕
@@ -140,7 +93,7 @@
 			},
     },
     created:function(){
-      this.scroll = 0
+      this.scroll = 0;
       this.$store.dispatch('fetchCgItemAn')
     },
     mounted:function(){

@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-Vue.use(Router)
+Vue.use(Router);
 
 function getCookie(name) {
-  var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  let arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   if (arr = document.cookie.match(reg))
     return (arr[2]);
   else
@@ -16,35 +16,51 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Posts',
-      component: () => import('@/components/Posts')
-    },
-    {
-      path: '/posts/',
-      redirect:'/'
-    },
-    {
-      path: '/posts/catagory/:item',
-      name:'Catagory',
-      component:() => import('@/components/Catagory')
+      name: 'Index',
+      meta: {
+        title: '首页',
+        hideInMenu: false
+      },
+      component: () => import('@/views/Index'),
     },
     {
       path: '/posts/:post_id',
       name: 'Original',
-      component: () => import('@/components/Original')
+      meta: {
+        title: '文章详情',
+        hideInMenu: false
+      },
+      component: () => import('@/views/Detail')
+    },
+    {
+      path: '/posts/catagory/:item',
+      name:'Catagory',
+      meta: {
+        title: '首页',
+        hideInMenu: false
+      },
+      component:() => import('@/components/Catagory')
     },
     {
       path: '/aboutme',
-      name: 'AboutMe',
-      component: () => import('@/components/AboutMe')
+      name: 'About',
+      meta: {
+        title: '关于我',
+        hideInMenu: false
+      },
+      component: () => import('@/views/About')
     },
     {
       path: '*',
-      name: 'notfound',
-      component: () => import('@/components/notfound')
+      name: 'Notfound',
+      meta: {
+        title: '找不到页面了',
+        hideInMenu: true
+      },
+      component: () => import('@/views/Notfound')
     },
   ],
-  // 添加scrollBehavior方法，当切换路由时都跳转到页面的顶部 
+  // 添加scrollBehavior方法，当切换路由时都跳转到页面的顶部
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition

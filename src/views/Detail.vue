@@ -43,22 +43,16 @@
 											<span>分享到微博</span>
 										</a>
 									</li>
-									<li class="mdui-menu-item">
-										<a href="javascript:;" class="mdui-ripple">
-											<i class="mdui-menu-item-icon mdui-icon material-icons">people</i>
-											<span>分享到微博</span>
-										</a>
-									</li>
 								</ul>
 								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '在其他设备上阅读'}"
 									 mdui-menu="{target: '#others-attr',position:'center'}">
 									<i class="mdui-icon material-icons">smartphone</i>
 								</a>
 								<div id="others-attr" class="mdui-menu">
-									<img style="width:250px;" v-bind:src="BindQrcode(post)">
+									<img style="width:250px;" v-bind:src="post.post_url">
 								</div>
-								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{post.body | wordCount(post.body) }}</span>字
-								&nbsp;|&nbsp;预计阅读{{post.body | readtime(post.body)}}分钟
+								&nbsp;&nbsp;共计<span style="margin:0 5px;">{{post.body.length }}</span>字
+								&nbsp;|&nbsp;预计阅读{{post.body | readTimeFilter(post.body)}}分钟
 							</div>
 						</div>
 					</div>
@@ -76,7 +70,7 @@
 					<div class="mdui-divider" style="margin-top: 100px;"></div>
 					<div style="margin:40px;" class="mdui-center">
 						<transition name="fade" mode="out-in">
-							<button class="mdui-fab mdui-ripple mdui-color-red mdui-center" v-if="good" key="notGood" @click="begood">
+							<button class="mdui-fab mdui-ripple mdui-color-red mdui-center" v-if="good" key="notGood" @click="like">
 								<i class="mdui-icon material-icons">battery_alert</i>
 							</button>
 							<button class="mdui-fab mdui-ripple mdui-color-grey-600 mdui-center" v-else key="good">
@@ -100,117 +94,92 @@
 </template>
 
 <script>
-	import axios from 'axios'
 	import loading from '../components/loading'
 	import mdui from 'mdui'
   import urls from '../config/urls'
+  import shareUtil from '../utils/share'
 
   export default {
-		name: "original",
-		data() {
-			return {
-				post:{cover_url:'https://static.pushy.site/pic/black.png',title:'loading...',content:'loading...',body:'loading...'},
-				showLoading:false,
-				good:true
-			}
-		},
-		components: {
+    name: "original",
+    data() {
+      return {
+        post: {
+          title: 'loading...',
+          content: 'loading...',
+          body: 'loading...'
+        },
+        showLoading: false,
+        good: true
+      }
+    },
+    components: {
       loading: loading
     },
-		methods:{
-			loadpost:function(){
-        this.showPost = null;
+    methods: {
+      getPost: function () {
         this.showLoading = true;
         let self = this;
-				axios.get(urls.post.detail(this.$route.params.post_id)).then(function(response){
-          console.log(response.data.data);
+        this.$http.get(urls.post.detail(this.$route.params.post_id)).then(function (response) {
+          document.title = response.data.data.title;
           self.showLoading = false;
-					self.post = response.data.data
+          self.post = response.data.data;
           self.$store.commit('CHANGE_TITLE', self.post.title);
-					self.$store.commit('CHANGE_URL', self.post.cover_url);
-				})
-			},
-			backgroundImgStyle:function(imgUrl){
-				return "background-image: url(" + imgUrl + ");"
-			},
-			requestGood:function(){
-				axios.post('https://api.pushy.site/posts/like',{
-					post_id:this.$route.params.post_id
-				}).then(response=>{
-					mdui.snackbar({
-						message: '已经有' + response.data.data.good + '个人对这篇文章点了赞',
-						position:'left-top'
-					});
-				}).catch(error=>{
-					console.log(error)
-				})
-			},
-			havegoodStatus:function() {
-				let post_id = this.$route.params.post_id
-				if (localStorage[post_id]) {
-					this.good = false
-				}
-			},
-			BindQrcode:function(post) {
-				return post.post_url
-			},
-			begood:function() {
-				this.good = !this.good
-				this.requestGood()
-				let post_id = this.$route.params.post_id
-				localStorage[post_id] = post_id
-			},
-			// 分享QQ的方法：
-			shareQQ:function() {
-				let url = location.href // 分享链接
-				let title = this.post.title // 分享标题
-				let summay = this.post.body // 分享摘要
-				let pics = this.post.cover_url // 分享封面
-				let shareUrl = `http://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
-				window.open(shareUrl)
-			},
-			// 分享QQ空间的方法
-			shareQzone:function() {
-				let url = location.href
-				let title = this.post.title
-				let summay = this.post.body
-				let pics = this.post.cover_url
-				let shareQzoneUrl = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&title=${title}&summary=${summay}&pics=${pics}`
-				window.open(shareQzoneUrl)
-			}
-		},
-		filters:{
-			wordCount:function(value){
-				// 计算文章的总字数
-				return value.length
-			},
-			readtime:function(value){
-				// 计算阅读时间：
-				let length = value.length
-				let time = length / 250
-				return parseInt(time)
-			}
-		},
-		created:function(){
-      this.loadpost();
-			this.havegoodStatus()
-		},
-		watch:{
-			// 如果路由有变化，会再次执行该方法
-			'$route': 'loadpost'
-		},
-		mounted:function(){
-			// 初始化mdui的圆形进度条组件
-			mdui.mutation()
-		},
-		updated:function(){
-			Prism.highlightAll();
-		}
+          self.$store.commit('CHANGE_URL', self.post.cover_url);
+        })
+      },
+      requestGood: function () {
+        this.$http.post('https://api.pushy.site/posts/like', {
+          post_id: this.$route.params.post_id
+        }).then(response => {
+          mdui.snackbar({
+            message: '已经有' + response.data.data.good + '个人对这篇文章点了赞',
+            position: 'left-top'
+          });
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      isLike () {
+        if (localStorage[this.$route.params.post_id]) {
+          this.good = false
+        }
+      },
+      like: function () {
+        this.good = !this.good;
+        this.requestGood();
+        let post_id = this.$route.params.post_id;
+        localStorage[post_id] = post_id
+      },
+      // 分享QQ的方法：
+      shareQQ () {
+        shareUtil.shareQQ(location.href, this.post)
+      },
+      // 分享QQ空间的方法
+      shareQzone () {
+        shareUtil.shareQzone(location.href, this.post);
+      }
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      '$route': 'getPost'
+    },
+    created: function () {
+      this.getPost();
+      this.isLike()
+    },
+    mounted: function () {
+      // 初始化mdui的圆形进度条组件
+      mdui.mutation()
+    }
   }
 
 </script>
 
 <style scoped>
+
+  .markdown-body img {
+    width: 20px;
+  }
 
 	.mdui-menu{
 		width: 200px;

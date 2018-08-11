@@ -4,28 +4,31 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import global from './config/global'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {App},
   template: '<App/>'
-})
+});
+
+Vue.use(global);
 
 // 设置cookie函数，传入三个参数，分别为：键名，值，过期时间
 Vue.prototype.setCookie = (c_name, value, expiredays) => {
-  var exdate = new Date();　　　　
+  let exdate = new Date();　　　　
   exdate.setDate(exdate.getDate() + expiredays);　　　　
   document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
 }
 
 // 得到cookie函数，传入cookie的键名：
 function getCookie(name) {
-  var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  let arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   if (arr = document.cookie.match(reg))
     return (arr[2]);
   else
@@ -34,7 +37,7 @@ function getCookie(name) {
 Vue.prototype.getCookie = getCookie;
 
 Vue.prototype.getCookie = (name) => {
-  var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  let arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   if (arr = document.cookie.match(reg))
     return (arr[2]);
   else
@@ -43,9 +46,9 @@ Vue.prototype.getCookie = (name) => {
 
 // 删除cookie的函数，传入cookie的键名：
 Vue.prototype.delCookie =(name) => {
-    var exp = new Date();
+    let exp = new Date();
     exp.setTime(exp.getTime() - 1);
-    var cval = getCookie(name);
+    let cval = getCookie(name);
     if (cval != null)
       document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
   }
@@ -57,24 +60,31 @@ Vue.filter('capitalize', function (value) {
   return value.charAt(0).toUpperCase() + value.slice(1)
 })
 
-Vue.filter('timeFilter',function(value) {
-  var time = new Date()
-  var b_time = new Date(Date.parse(value.replace(/-/g,  "/")));
-  var current_year = time.getFullYear()
-  var current_Month = time.getMonth()
-  var current_Day = time.getDate()
-  var back_current_year = b_time.getFullYear()
-  var back_current_Month = b_time.getMonth()
-  var back_current_Day = b_time.getDate()
+Vue.filter('timeFilter', function (value) {
+  let time = new Date()
+  let b_time = new Date(Date.parse(value.replace(/-/g, "/")));
+  let current_year = time.getFullYear()
+  let current_Month = time.getMonth()
+  let current_Day = time.getDate()
+  let back_current_year = b_time.getFullYear()
+  let back_current_Month = b_time.getMonth()
+  let back_current_Day = b_time.getDate()
   if (back_current_year < current_year) {
-    var diff = current_year - back_current_year
+    let diff = current_year - back_current_year
     return diff + '年前发布'
-  }else{
-    if (back_current_Month == current_Month && current_Day - back_current_Day >0 && current_Day - back_current_Day <10){
-      var diff = current_Day - back_current_Day
+  } else {
+    if (back_current_Month == current_Month && current_Day - back_current_Day > 0 && current_Day - back_current_Day < 10) {
+      let diff = current_Day - back_current_Day
       return diff + '天前发布'
-    }else{
+    } else {
       return value
     }
   }
-})
+});
+
+Vue.filter('readTimeFilter', (value) => {
+    // 计算阅读时间：
+    let length = value.length;
+    let time = length / 250;
+    return parseInt(time)
+});

@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <Jumbotron></Jumbotron>
+    <Jumbotron v-show="!$route.meta.hideInMenu"></Jumbotron>
     <div id="router">
       <transition-group name="list" tag="p">
       <!-- <transition name="slide-fade"> -->
-        <router-view v-if="showRouter" key="router"></router-view>
+        <router-view v-if="showRouter" key="router" ></router-view>
       <!-- </transition> -->
       </transition-group>
     </div>
-    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink-a200 mdui-hidden-sm-down" @click="toTop" 
+    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink-a200 mdui-hidden-sm-down" @click="toTop"
             mdui-tooltip="{content: '回顶部'}" id="toTop-fib">
       <i class="mdui-icon material-icons">arrow_upward</i>
     </button>
-    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink-a200 mdui-fab-mini mdui-hidden-md-up" 
+    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink-a200 mdui-fab-mini mdui-hidden-md-up"
             @click="toTop" id="toTop-fib">
       <i class="mdui-icon material-icons">arrow_upward</i>
     </button>

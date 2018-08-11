@@ -8,11 +8,11 @@ export default {
   fetchIndexPostsAn ({ commit }) {
     let pageNum = store.state.pageNum;
     axios.get(urls.post.postList(pageNum)).then(response=>{
-      if (response.data.data.length == 0){
-        commit(types.NO_ANY_POSTS) // 显示没有任何文章可以加载了
+      if (response.data.data.length === 0){
+        commit(types.NO_ANY_POSTS); // 显示没有任何文章可以加载了
         commit(types.CHANGE_BTN_VALUE)
       }
-      if (pageNum == 1){
+      if (pageNum === 1){
         store.state.requestedPage.push(1);
         // 如果当前页数为第一页，也不去合并数组，直接将第一页的数组赋值
         commit('HIDDEN_INDEX_LOADING');
@@ -36,7 +36,7 @@ export default {
   fetchCodeDataAn ({ commit }) {
     let codePageNum = store.state.codePageNum
     axios.get('https://api.pushy.site/code?page=' + codePageNum).then(response=> {
-      if (response.data.data.length == 0) {
+      if (response.data.data.length === 0) {
         commit('NO_MORE_CODE_DATA')
       }else{
         store.state.codeDataArray = response.data.data
