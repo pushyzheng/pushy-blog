@@ -47,7 +47,7 @@
 			<div id="readmore-btn-div">
 				<button class="mdui-btn mdui-ripple mdui-color-pink-a200 mdui-btn-block mdui-btn-raised"
 								@click="readMore" :disabled=showNoAnyPost>
-								{{readMoreBtnValue}}
+            {{readMoreBtnValue}}
 				</button>
 			</div>
 			</div>
@@ -146,8 +146,9 @@
       },
     },
     created: function () {
+      document.title = "首页 - Pushy"
       this.$store.commit('CHANGE_TITLE', "Up and up up and up");
-      this.$store.commit('CHANGE_URL', "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-681363.jpg");
+      this.$store.commit('CHANGE_URL', 'https://static.pushy.site/personal/blog-cover.jpg');
       if (this.pageNum === 1) {
         this.$store.dispatch('fetchIndexPostsAn')
       }

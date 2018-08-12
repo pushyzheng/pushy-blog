@@ -1,4 +1,6 @@
-let domain = "http://localhost:9999";
+// let domain = "http://localhost:9999";
+let domain = "https://api.pushy.site";
+
 
 export default {
   post: {
@@ -8,5 +10,8 @@ export default {
     detail (id) {
       return domain + `/posts/${id}`
     }
+  },
+  category: {
+    cgList: domain + '/catagory/items'
   }
 }

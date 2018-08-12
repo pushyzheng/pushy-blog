@@ -137,6 +137,7 @@
       }
     },
     created:function(){
+      document.title = "关于我 - Pushy"
       this.getLikeCount()
     }
   }

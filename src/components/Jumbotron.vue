@@ -24,8 +24,8 @@
       </div>
       <div>
       <!-- 分类目录列表 -->
-      <div @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
-        <div class="mdui-chip" style="float: left;margin: 5px;">
+      <div @click="toCatagoryPost(item.item)" v-for="item in cgItemArray" id="category-list">
+        <div class="mdui-chip" style="float: left;margin: 7px 5px;">
           <span class="mdui-chip-icon">{{item.count}}</span>
           <span class="mdui-chip-title">{{item.item | capitalize}}</span>
         </div>
@@ -34,10 +34,13 @@
     </div>
     <!--顶端巨幕-->
       <div id="jumbotron-pic">
-        <div id="jumbotron-text">
-          <p class="jumbotron-text" style="margin-bottom:20px;">{{ jumbotronTitle }}</p>
-          <!--<p class="jumbotron-text">你还见过多少人</p>-->
-        </div>
+        <transition name="bounce">
+          <div id="jumbotron-text" v-if="showTitle">
+            <p class="jumbotron-text" style="margin-bottom:20px;">{{ jumbotronTitle }}</p>
+            <!--<p class="jumbotron-text">你还见过多少人</p>-->
+          </div>
+        </transition>
+
       </div>
   </div>
 </template>
@@ -50,7 +53,8 @@
     data(){
       return {
         scroll:'',
-        navBgColor:false
+        navBgColor:false,
+        showTitle:  false
       }
     },
     computed:{
@@ -94,9 +98,10 @@
     },
     created:function(){
       this.scroll = 0;
-      this.$store.dispatch('fetchCgItemAn')
+      this.$store.dispatch('fetchCgItemAn');
     },
     mounted:function(){
+      this.showTitle = true;
 			mdui.mutation();
 		},
   }
@@ -130,6 +135,10 @@
     font-weight: bold;
   }
 
+  #category-list {
+    margin: 20px 0;
+  }
+
   #drawer-top{
     background-image: url('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2905888767,767561608&fm=27&gp=0.jpg');
     height: 130px;
@@ -155,6 +164,24 @@
   }
   .drawer-list-text{
     font-weight: bolder
+  }
+
+  .bounce-enter-active {
+  animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   @media screen and (min-width: 1024px){

@@ -18,7 +18,7 @@ export default {
     state.showIndexLoading = false
   },
   [types.CHANGE_BTN_VALUE] (state) {
-    state.readMoreBtnValue = 'no more'
+    state.readMoreBtnValue = '已经加载完惹'
   },
   [types.CODE_PAGE_INCREMENT] (state) {
     state.codePageNum ++

@@ -14,7 +14,7 @@ const state = {
   cgItemArray:[],  // 存放首页侧边栏目录的数组
   showNoAnyPost:false, // 显示没有任何文章加载的状态值
   showIndexLoading:true,
-  readMoreBtnValue:'more',
+  readMoreBtnValue:'加载更多',
   codeDataArray:[],
   codePageNum:1,
   showNoCodeData:false

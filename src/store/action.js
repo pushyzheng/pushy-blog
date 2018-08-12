@@ -26,7 +26,7 @@ export default {
   },
   // 处理标签状态部分：
   fetchCgItemAn ({ commit }) {
-    axios.get('https://api.pushy.site/catagory/return_all_item').then(response=>{
+    axios.get(urls.category.cgList).then(response=>{
       commit(types.LOAD_CATAGORY_ITEM,response.data.data)
     }).catch(error=>{
       console.log(error)

@@ -22,7 +22,8 @@
 						<!-- 分享和文章阅读信息一栏 -->
 						<div class="mdui-col-md-4">
 							<div style="color:#ABAAAA;margin-top:19px;" id="share-div">
-								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '分享该文章'}" mdui-menu="{target: '#share-attr'}">
+								<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '分享该文章'}"
+                   mdui-menu="{target: '#share-attr'}">
 									<i class="mdui-icon material-icons">&#xe80d;</i>
 								</a>
 								<ul class="mdui-menu" id="share-attr">
@@ -120,7 +121,7 @@
         this.showLoading = true;
         let self = this;
         this.$http.get(urls.post.detail(this.$route.params.post_id)).then(function (response) {
-          document.title = response.data.data.title;
+          document.title = response.data.data.title + " - Pushy";
           self.showLoading = false;
           self.post = response.data.data;
           self.$store.commit('CHANGE_TITLE', self.post.title);
@@ -177,8 +178,8 @@
 
 <style scoped>
 
-  .markdown-body img {
-    width: 20px;
+  img {
+    width: 70%;
   }
 
 	.mdui-menu{
