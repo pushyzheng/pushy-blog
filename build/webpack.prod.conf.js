@@ -33,8 +33,20 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
   	new PrerenderSpaPlugin(
   		path.join(__dirname,'../dist'),
-  		['/aboutme','/posts/1519817202','/posts/1519817324','/posts/1519817411','/posts/1519817890',
-      '/posts/1519818136','/posts/1519819757'],
+  		['/aboutme','/posts/1519817202',
+        '/posts/1519817324',
+        '/posts/1519817411',
+        '/posts/1519817890',
+        '/posts/1519818136',
+        '/posts/1519819757',
+        '/posts/1522637029',
+        '/posts/1523194682',
+        '/posts/1524907951',
+        '/posts/1531547864',
+        '/posts/1531836562',
+        '/posts/1532055928',
+        '/posts/1534512896'
+      ],
   		{
   			captureAfterTime:5000
   		}
