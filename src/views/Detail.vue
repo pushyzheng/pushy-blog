@@ -124,6 +124,7 @@
           document.title = response.data.data.title + " - Pushy";
           self.showLoading = false;
           self.post = response.data.data;
+          document.title = post.title + "- Pushy Blog"
           self.$store.commit('CHANGE_TITLE', self.post.title);
           self.$store.commit('CHANGE_URL', self.post.cover_url);
         })

@@ -18,29 +18,42 @@
     </div>
     <div class="mdui-drawer mdui-drawer-close" id="drawer">
       <div id="drawer-top">
-        <div>
-            <img src="https://static.pushy.site/personal/gravatar.jpg" class="mdui-img-fluid mdui-img-circle" style="width:60px">
+        <img src="https://static.pushy.site/personal/gravatar.jpg"
+             class="mdui-img-circle" style="width:60px">
+        <div id="drawer-top-text">
+          Pushy
         </div>
       </div>
-      <div>
-      <!-- 分类目录列表 -->
-      <div @click="toCatagoryPost(item.item)" v-for="item in cgItemArray" id="category-list">
-        <div class="mdui-chip" style="float: left;margin: 7px 5px;">
-          <span class="mdui-chip-icon">{{item.count}}</span>
-          <span class="mdui-chip-title">{{item.item | capitalize}}</span>
+      <div id="drawer-category">
+        <div style="text-align: center">
+          <h2>标签</h2>
+        </div>
+        <!-- 分类目录列表 -->
+        <div id="category-list">
+          <div class="mdui-chip" @click="toCatagoryPost(item.item)" v-for="item in cgItemArray">
+            <span class="mdui-chip-icon">{{item.count}}</span>
+            <span class="mdui-chip-title">{{item.item | capitalize}}</span>
+          </div>
         </div>
       </div>
+      <div id="drawer-link">
+        <div style="text-align: center">
+          在这里也可以找到我
+        </div>
+        <div style="padding: 10px;">
+          <img src="../assets/github.png" class="link-icon"
+               @click="openLink('https://github.com/PushyZqin')">
+          <img src="../assets/zhihu.png" class="link-icon"
+               @click="openLink('https://www.zhihu.com/people/pushyzqin/activities')">
+        </div>
       </div>
     </div>
     <!--顶端巨幕-->
       <div id="jumbotron-pic">
-        <transition name="bounce">
           <div id="jumbotron-text" v-if="showTitle">
             <p class="jumbotron-text" style="margin-bottom:20px;">{{ jumbotronTitle }}</p>
             <!--<p class="jumbotron-text">你还见过多少人</p>-->
           </div>
-        </transition>
-
       </div>
   </div>
 </template>
@@ -84,7 +97,7 @@
          }
       },
       openDrawer:function() {
-        let inst = new mdui.Drawer('#drawer',{overlay:true});
+        let inst = new mdui.Drawer('#drawer',{overlay: true});
         inst.open();
       },
       toCatagoryPost:function(item){
@@ -95,6 +108,9 @@
         $$.unlockScreen();  // 解锁屏幕
 				this.$router.push({ name: 'Catagory', params: { item: item }})
 			},
+      openLink(url) {
+        window.open(url)
+      }
     },
     created:function(){
       this.scroll = 0;
@@ -116,38 +132,27 @@
   /*定义巨幕的样式*/
   #jumbotron{
     background-color: black;
-    /*background-image: url("../assets/test/3.jpg");*/
     background-size:cover;
     background-position: center center;
     margin-bottom: 25px;
     opacity: 1;
   }
+
   #jumbotron-pic{
     padding: 210px;
     text-align: center;
   }
+
   #jumbotron-pic:after{
     background:rgba(0,0,0,.4)
   }
+
   .jumbotron-text{
     font-size: 26px;
     color:white;
     font-weight: bold;
   }
 
-  #category-list {
-    margin: 20px 0;
-  }
-
-  #drawer-top{
-    background-image: url('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2905888767,767561608&fm=27&gp=0.jpg');
-    height: 130px;
-    padding-left: 20px;
-    padding-top: 70px;
-    background-position: center center;
-    background-size: cover;
-    color: white
-  }
   /*定义巨幕导航栏的样式*/
   .nav-item-text{
     /*margin: 0 2px!important;*/
@@ -158,30 +163,45 @@
   #drawer{
     background-color: white;
   }
-  #drawer-top-text{
-    padding-top: 123px;
-    padding-left: 25px;
-  }
-  .drawer-list-text{
-    font-weight: bolder
+
+  #drawer-top{
+    background-image: url('https://images.unsplash.com/photo-1534448654703-fbfe17f692fb?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f917eb80b21c7c5281db2505f0328396&auto=format&fit=crop&w=1950&q=80');
+    background-position: center center;
+    background-size: cover;
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
   }
 
-  .bounce-enter-active {
-  animation: bounce-in .5s;
+  #drawer-top-text {
+    font-size: 25px;
+    font-weight: bolder;
+    margin-top: 10px;
   }
-  .bounce-leave-active {
-    animation: bounce-in .5s reverse;
+
+  /*标签列表样式*/
+  #category-list {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
-  @keyframes bounce-in {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(1.5);
-    }
-    100% {
-      transform: scale(1);
-    }
+
+  .mdui-chip {
+    margin-bottom: 10px;
+    margin-right: 5px;
+  }
+
+  .link-icon {
+    width: 40px;
+    cursor: pointer;
+  }
+
+  .mdui-collapse-item-body .mdui-list-item{
+    padding-left: 16px;
   }
 
   @media screen and (min-width: 1024px){
@@ -205,9 +225,5 @@
       font-weight: bold;
     }
 	}
-
-  .mdui-collapse-item-body .mdui-list-item{
-    padding-left: 16px;
-  }
 
 </style>

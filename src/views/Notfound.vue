@@ -1,10 +1,8 @@
 <template>
-  <div id="notfound">
-    <div class="mdui-center mdui-img-fluid" style="text-align:center">
-      <router-link to="/">
-        <img src="../assets/404.jpg" alt="">
-      </router-link>
-    </div>
+  <div id="not-found">
+    <router-link to="/">
+      <img src="../assets/404.jpg" alt="">
+    </router-link>
   </div>
 </template>
 
@@ -15,5 +13,12 @@
 </script>
 
 <style scoped>
+
+  #not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+  }
 
 </style>

@@ -4,53 +4,53 @@
       <loading></loading>
     </div>
   	<div class="mdui-container-fluid" style="margin-bottom:200px;" v-else>
-			<div id="posts-div">
-			<!-- 循环内容文章卡片 -->
-			<transition-group name="list" tag="p">
-				<div class="mdui-shadow-4 post-card" v-for="(post,postIndex) in indexPostsArray" v-bind:key="post.post_id">
-					<!-- 封面和标题部分 -->
-					<div class="cover-title" v-bind:style="backgroundImgStyle(post.cover_url)">
-						<router-link v-bind:to="toDetailLink(post.post_id)" class="title-link">
-							{{post.title}}
-						</router-link>
-					</div>
-					<!-- 概览部分 -->
-					<div style="color:#777777;line-height:1.8;margin:20px 15px">
-						<span v-html="postContentFilter(post.body,post.post_id)"></span>
-						<router-link v-bind:to="toDetailLink(post.post_id)" style="color:#1ABC9C">
-							阅读原文
-						</router-link>
-					</div>
+      <div id="posts-div" class="my-container">
+        <!-- 循环内容文章卡片 -->
+        <transition-group name="list" tag="p">
+          <div class="mdui-shadow-4 post-card" v-for="(post,postIndex) in indexPostsArray" v-bind:key="post.post_id">
+            <!-- 封面和标题部分 -->
+            <div class="cover-title" v-bind:style="backgroundImgStyle(post.cover_url)">
+              <router-link v-bind:to="toDetailLink(post.post_id)" class="title-link">
+                {{post.title}}
+              </router-link>
+            </div>
+            <!-- 概览部分 -->
+            <div style="color:#777777;line-height:1.8;margin:20px 15px">
+              <span v-html="postContentFilter(post.body,post.post_id)"></span>
+              <router-link v-bind:to="toDetailLink(post.post_id)" style="color:#1ABC9C">
+                阅读原文
+              </router-link>
+            </div>
 
-					<div class="mdui-divider"></div>
-					<!-- 文章信息部分 -->
-					<div style="margin-top: 15px;padding-left: 10px;padding-right: 30px;">
-							<!-- 文章 标签 -->
-							<div class="mdui-chip catagory-label"
-									v-bind:class="labelHoverClass(postIndex,CgIndex)"
-									v-for="(item,CgIndex) in post.catagory"
-									@mouseenter="labelMouseEnter(postIndex,CgIndex)"
-									@mouseleave="labelMouseLeave"
-									@click="toCatagoryPost(item)"
-									>
-								<span class="mdui-chip-title">{{item}}</span>
-							</div>
-							<!-- 发布时间 -->
-							<div class="mdui-float-right mdui-valign time-div">
-								<i class="mdui-icon material-icons">access_time</i>&nbsp;
-								<span v-bind:mdui-tooltip="mduiTooltip(post.create_time)">{{post.create_time | timeFilter}}</span>
-							</div>
-					</div>
-					<br>
-				</div>
-			</transition-group>
-			<div id="readmore-btn-div">
-				<button class="mdui-btn mdui-ripple mdui-color-pink-a200 mdui-btn-block mdui-btn-raised"
-								@click="readMore" :disabled=showNoAnyPost>
-            {{readMoreBtnValue}}
-				</button>
-			</div>
-			</div>
+            <div class="mdui-divider"></div>
+            <!-- 文章信息部分 -->
+            <div style="margin-top: 15px;padding-left: 10px;padding-right: 30px;">
+                <!-- 文章 标签 -->
+                <div class="mdui-chip catagory-label"
+                    v-bind:class="labelHoverClass(postIndex,CgIndex)"
+                    v-for="(item,CgIndex) in post.catagory"
+                    @mouseenter="labelMouseEnter(postIndex,CgIndex)"
+                    @mouseleave="labelMouseLeave"
+                    @click="toCatagoryPost(item)"
+                    >
+                  <span class="mdui-chip-title">{{item}}</span>
+                </div>
+                <!-- 发布时间 -->
+                <div class="mdui-float-right mdui-valign time-div">
+                  <i class="mdui-icon material-icons">access_time</i>&nbsp;
+                  <span v-bind:mdui-tooltip="mduiTooltip(post.create_time)">{{post.create_time | timeFilter}}</span>
+                </div>
+            </div>
+            <br>
+          </div>
+        </transition-group>
+        <div id="read-more-btn">
+          <button class="mdui-btn mdui-ripple mdui-color-pink-a200 mdui-btn-block mdui-btn-raised"
+                  @click="readMore" :disabled=showNoAnyPost>
+              {{readMoreBtnValue}}
+          </button>
+        </div>
+      </div>
 		</div>
   </div>
 </template>
@@ -58,13 +58,10 @@
 <script>
 	import loading from '../components/loading'
 	import mdui from 'mdui'
-  import Prism from 'prismjs'
 
   export default {
     name: "posts",
-    components: {
-      loading: loading
-    },
+    components: { loading },
     data() {
       return {
         // some code
@@ -147,7 +144,7 @@
     },
     created: function () {
       document.title = "首页 - Pushy"
-      this.$store.commit('CHANGE_TITLE', "Up and up up and up");
+      this.$store.commit('CHANGE_TITLE', "UP&UP");
       this.$store.commit('CHANGE_URL', 'https://static.pushy.site/personal/blog-cover.jpg');
       if (this.pageNum === 1) {
         this.$store.dispatch('fetchIndexPostsAn')
@@ -179,20 +176,10 @@
 	pre:hover{
 		cursor: text
 	}
-	.mdui-dialog{
-		max-width: 900px;
-	}
 
-	#readmore-btn-div{
+	#read-more-btn{
 		margin: 0 300px;
 	}
-
-	.pre-background-color{
-		background-color: #E9ECEF;
-	}
-
-
-
 
 	.cover-title{
 		background-size:cover;
@@ -203,12 +190,12 @@
 		text-shadow:1px 1px 8px #444;
 		font-weight:400;
 	}
-	.title-link{
-		margin:0px;
-		margin-top:150px;
-		color:white;
-		display:block
-	}
+	.title-link {
+    margin: 0px;
+    margin-top: 150px;
+    color: white;
+    display: block
+  }
 	.time-div{
 		margin-top: 8px;color: #8C8C8C;
 		font-weight: bolder;
@@ -218,38 +205,9 @@
 		margin-bottom:30px;
 		background-color: white
 	}
-	/* .post-card:hover{
-		box-shadow: rgb(108,105,105) 5px 5px 20px;
-	} */
+
 	.catagory-label{
 		margin-right: 10px;
-	}
-
-	#posts-div{
-		margin: 0 500px;
-	}
-	#loading-text{
-		text-align: center;
-		font-size: 15px;
-		font-weight: bold;
-		background-color: #fcf8e3;
-		color: #8a6d3b;
-		border: 1px solid #faebcc;
-		padding: 10px 0;
-		width: 400px;
-	}
-
-	/* 定义侧边栏目录的样式 */
-	.catagory-chip{
-		margin: 20px 100px;
-		width: 100px;
-	}
-	#right-catagory-div{
-		/* margin-top: 15px; */
-	}
-
-	.catagory-item-count{
-		color: white
 	}
 
 	/* 定义列表加载属性： */
@@ -266,18 +224,13 @@
 		transform: translateY(30px);
 	}
 
-		@media screen and (max-width:840px){
+  @media screen and (max-width:840px){
 		.cover-title a{
 			font-size: 22px;
 		}
-		#right-catagory-div{
-			margin-top: 40px;
-		}
-		#readmore-btn-div{
-		margin: 0 100px;
-		}
-		#posts-div{
-			margin: 0
+
+		#read-more-btn{
+		  margin: 0 100px;
 		}
 	}
 
