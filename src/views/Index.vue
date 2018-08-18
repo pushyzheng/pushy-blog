@@ -7,7 +7,7 @@
       <div id="posts-div" class="my-container">
         <!-- 循环内容文章卡片 -->
         <transition-group name="list" tag="p">
-          <div class="mdui-shadow-4 post-card" v-for="(post,postIndex) in indexPostsArray" v-bind:key="post.post_id">
+          <div class="post-card" v-for="(post,postIndex) in indexPostsArray" v-bind:key="post.post_id">
             <!-- 封面和标题部分 -->
             <div class="cover-title" v-bind:style="backgroundImgStyle(post.cover_url)">
               <router-link v-bind:to="toDetailLink(post.post_id)" class="title-link">
@@ -144,7 +144,7 @@
     },
     created: function () {
       document.title = "首页 - Pushy"
-      this.$store.commit('CHANGE_TITLE', "UP&UP");
+      this.$store.commit('CHANGE_TITLE', "So give me reason to prove me wrong");
       this.$store.commit('CHANGE_URL', 'https://static.pushy.site/personal/blog-cover.jpg');
       if (this.pageNum === 1) {
         this.$store.dispatch('fetchIndexPostsAn')
@@ -185,9 +185,10 @@
     background-position: center center;
 		color:white;
 		padding:20px;
-		font-size:34px;
+		font-size:28px;
 		text-shadow:1px 1px 8px #444;
 		font-weight:400;
+    text-decoration: none;
 	}
 	.title-link {
     margin: 0px;
@@ -202,7 +203,9 @@
 	}
 	.post-card{
 		margin-bottom:30px;
-		background-color: white
+		background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px 0 rgba(7,17,27,.1);
 	}
 
 	.catagory-label{

@@ -184,7 +184,9 @@
 
   /*标签列表样式*/
   #category-list {
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

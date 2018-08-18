@@ -38,6 +38,7 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #F8FAFC;
   }
   /* 定义路由的过渡效果 */
 	.list-item {
