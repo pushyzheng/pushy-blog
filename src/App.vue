@@ -49,7 +49,7 @@
 	}
 	.list-enter {
 		opacity: 0;
-		transform: translateY(80px);
+		transform: translateY(30px);
 	}
 
   /*页脚样式*/

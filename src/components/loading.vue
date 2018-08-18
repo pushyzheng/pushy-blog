@@ -2,7 +2,7 @@
   <div id="loading">
     <div id="loading-div">
       <!--<div class="mdui-spinner mdui-spinner-colorful"></div>-->
-      <img src="../assets/octo-loader.gif" alt="" id="loading-img">
+      <img src="../assets/pic/octo-loader.gif" alt="" id="loading-img">
     </div>
   </div>
 </template>

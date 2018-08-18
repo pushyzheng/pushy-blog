@@ -1,7 +1,7 @@
 <template>
   <div id="not-found">
     <router-link to="/">
-      <img src="../assets/404.jpg" alt="">
+      <img src="../assets/pic/404.jpg" alt="">
     </router-link>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <template>
-  <div class="original">
-		<div class="mdui-container-fluid" id="post-container" >
+  <div id="Detail">
+    <loading v-if="showLoading" />
+		<div class="mdui-container-fluid" id="post-container">
 			<div class="post-card">
 				<div>
 					<div class="mdui-row" style="margin-top:20px;">
@@ -101,7 +102,7 @@
   import shareUtil from '../utils/share'
 
   export default {
-    name: "original",
+    name: "Detail",
     data() {
       return {
         post: {
@@ -109,24 +110,21 @@
           content: 'loading...',
           body: 'loading...'
         },
-        showLoading: false,
+        showLoading: true,
         good: true
       }
     },
-    components: {
-      loading: loading
-    },
+    components: { loading },
     methods: {
       getPost: function () {
-        this.showLoading = true;
         let self = this;
         this.$http.get(urls.post.detail(this.$route.params.post_id)).then(function (response) {
           document.title = response.data.data.title + " - Pushy";
           self.showLoading = false;
           self.post = response.data.data;
-          document.title = post.title + "- Pushy Blog"
           self.$store.commit('CHANGE_TITLE', self.post.title);
           self.$store.commit('CHANGE_URL', self.post.cover_url);
+          document.title = self.post.title + "- Pushy Blog"
         })
       },
       requestGood: function () {

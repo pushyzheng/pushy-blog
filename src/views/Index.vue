@@ -156,7 +156,6 @@
       mdui.mutation();
     },
     updated: function () {
-      Prism.highlightAll();
       var $$ = mdui.JQ;
       $$('.token operator').addClass('pre-background-color')
     }

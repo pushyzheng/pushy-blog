@@ -41,9 +41,9 @@
           在这里也可以找到我
         </div>
         <div style="padding: 10px;">
-          <img src="../assets/github.png" class="link-icon"
+          <img src="../assets/pic/github.png" class="link-icon"
                @click="openLink('https://github.com/PushyZqin')">
-          <img src="../assets/zhihu.png" class="link-icon"
+          <img src="../assets/pic/zhihu.png" class="link-icon"
                @click="openLink('https://www.zhihu.com/people/pushyzqin/activities')">
         </div>
       </div>
